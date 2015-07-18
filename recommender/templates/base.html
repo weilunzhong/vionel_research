@@ -4,16 +4,60 @@
 <head>
     <script type="text/javascript" src="{% static 'recommender/js/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'recommender/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'recommender/css/base.css' %}">
     <script src="{% static 'recommender/js/bootstrap.min.js' %}"></script>
     <title></title>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-fixed-top">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+            <!-- <li class="active"><a href="#">Recommender</a></li> -->
+            
+        </ul>
+        <ul class="navbar-right">
+            <li>
+                <a href="#">
+                    <div id="logo">
+                        <img src="{% static 'recommender/images/Logo.PNG' %}">
+                    </div>
+                </a>
+            </li>
         </ul>
     </nav>
+
+
+    <div class="container main-box">
+        <div class="jumbotron">
+            <h1>Recommender System</h1>
+            <div class="submit-area">
+                <div class="input-area">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <input type="text" placeholder="Input IMDB ids">
+                </div>
+                <div class="button-area">
+                    <button>SUBMIT</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
