@@ -19,5 +19,5 @@ def recommend(request):
     movies_to_show = {}
     movies_to_show['input_movie_list'] = trimed_movie_list
     movies_to_show['recommend_moive_list'] = recommend_movie_list
-
+    # print movies_to_show, '=============='
     return render(request, 'base.html', {'movies_to_show': movies_to_show})

@@ -32,7 +32,7 @@
             <form action="/recommend/" method="get">
                 <div class="submit-area">
                     <div class="input-area">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-search search-icon" aria-hidden="true"></span>
                         <input type="text" name="inputMovies" placeholder="Input IMDB ids">
                     </div>
                     <div class="button-area">
@@ -41,24 +41,32 @@
                     </div>
                 </div>
             </form>
-            <div class="result-box">
-                <div class="user-input-poster">
-                    {% for img_name in movies_to_show.input_movie_list %}
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
-                        {{ img_name }}
+
+            {% if movies_to_show %}
+                <div class="result-box">
+                    <div class="user-input-poster">
+                        <div class="section-title"><h2>User Like Movies</h2></div>
+                        {% for img_name in movies_to_show.input_movie_list %}
+                        <div class="poster-box">
+                            <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
+                            {{ img_name }}
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
-                <div class="final-recommender">
-                    {% for img_name in movies_to_show.recommend_moive_list %}
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
-                        {{ img_name }}
+                    <hr>
+                    <div class="final-recommender">
+                        <div class="section-title"><h2>Final Recommended Movies</h2></div>
+                        {% for img_name in movies_to_show.recommend_moive_list %}
+                        <div class="poster-box">
+                            <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
+                            {{ img_name }}
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
+            {% else %}
+
+            {% endif %}
         </div>
     </div>
 </body>
