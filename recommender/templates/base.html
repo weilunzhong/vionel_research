@@ -13,11 +13,10 @@
     <nav class="navbar navbar-fixed-top">
         <ul class="nav navbar-nav">
             <!-- <li class="active"><a href="#">Recommender</a></li> -->
-            
         </ul>
         <ul class="navbar-right">
             <li>
-                <a href="#">
+                <a href="{% url 'index' %}">
                     <div id="logo">
                         <img src="{% static 'recommender/images/Logo.PNG' %}">
                     </div>
@@ -30,53 +29,34 @@
     <div class="container main-box">
         <div class="jumbotron">
             <h1>Recommender System</h1>
-            <div class="submit-area">
-                <div class="input-area">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    <input type="text" placeholder="Input IMDB ids">
+            <form action="/recommend/" method="get">
+                <div class="submit-area">
+                    <div class="input-area">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        <input type="text" name="inputMovies" placeholder="Input IMDB ids">
+                    </div>
+                    <div class="button-area">
+                        <button type="submit">SUBMIT</button>
+                        <!-- <input type="submit" value="Submit"> -->
+                    </div>
                 </div>
-                <div class="button-area">
-                    <button>SUBMIT</button>
-                </div>
-            </div>
-
+            </form>
             <div class="result-box">
                 <div class="user-input-poster">
+                    {% for img_name in movies_to_show.input_movie_list %}
                     <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
+                        <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
+                        {{ img_name }}
                     </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
-                    <div class="poster-box">
-                        <img src="{% static 'recommender/images/posters/tt0000001.jpg' %}">
-                        tt0000001
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="final-recommender">
-                    <div class="poster-box"></div>
+                    {% for img_name in movies_to_show.recommend_moive_list %}
+                    <div class="poster-box">
+                        <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
+                        {{ img_name }}
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ body {
 
 .main-box {
     margin-top: 100px;
+    margin-bottom: 50px;
     background-color: #032339;
     min-height: 500px;
     padding: 0;
@@ -114,9 +115,9 @@ h1 {
     margin-right: 5px;
 }
 .poster-box img {
-    max-width: 100%;
-    /*width: 120px;
-    height: 180px;*/
+    width: 120px;
+    height: 180px;
+    border-radius: 5px;
 }
 
 .final-recommender {

@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 'recommender.views.index'),
+    url(r'^$', 'recommender.views.index', name='index'),
+    url(r'^recommend/$', 'recommender.views.recommend'),
 ]
