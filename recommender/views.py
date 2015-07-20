@@ -16,10 +16,10 @@ def recommend(request):
     input_movie_list = input_movies.split(',')
     trimed_movie_list = map(lambda x: x.strip(), input_movie_list)
 
-    recommend_movie_list = recommender.recommend(trimed_movie_list, recommend_num)
+    recommendmovie_score_dict = recommender.recommend(trimed_movie_list, recommend_num)
 
     movies_to_show = {}
     movies_to_show['input_movie_list'] = trimed_movie_list
-    movies_to_show['recommend_moive_list'] = recommend_movie_list
+    movies_to_show['recommendmovie_score_dict'] = recommendmovie_score_dict
     # print movies_to_show, '=============='
     return render(request, 'base.html', {'movies_to_show': movies_to_show})

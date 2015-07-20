@@ -91,10 +91,6 @@ def generate_result(genre_movieid_sim_dict, actor_movieid_sim_dict, director_mov
     combined_movieid_sim_counter = filter_by_language(user_liked_movie_id_list, combined_movieid_sim_counter)
 
 
-
-    
-
-
     final_co_recommended_movies = combined_movieid_sim_counter.most_common(num_of_recommended_movies)
     final_genre_recommended_movies = genre_movieid_sim_counter.most_common(num_of_recommended_movies)
     final_actor_recommended_movies = actor_movieid_sim_counter.most_common(num_of_recommended_movies)
@@ -120,8 +116,9 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_met
     # num_of_recommended_movies = 15
     result = generate_result(genre_movieid_sim_dict, actor_movieid_sim_dict, director_movieid_sim_dict, num_of_recommended_movies, user_liked_movie_id_list)
 
-    # print result["all"]
-    return dict(result[recommend_method]).keys()
+    print result["all"]
+    return result["all"]
+    # return dict(result[recommend_method]).keys()
 
 
 
@@ -140,18 +137,14 @@ def combine_like_dislike(recommend_like_counter, recommend_dislike_counter):
 
 
 
-# user_like_movie_id_list = ["tt0133093","tt0137523","tt0468569","tt0172495","tt0114369","tt1375666","tt0361862","tt0482571","tt0268978","tt0110322"]
+user_like_movie_id_list = ["tt0133093","tt0137523","tt0468569","tt0172495","tt0114369","tt1375666","tt0361862","tt0482571","tt0268978","tt0110322"]
 #user_like_movie_id_list = ["tt0468569","tt0137523","tt0114369","tt0110322","tt0172495","tt0133093","tt1375666","tt1345836","tt0109830","tt0814314"]
 # user_like_movie_id_list = ["tt0468569", "tt0137523", "tt0964517","tt1375666","tt0172495","tt0109830","tt0112573","tt0120815","tt0209144","tt1130884","tt0372784","tt0114369","tt1504320","tt0454876","tt0212720","tt0111161","tt0099487","tt1291584","tt0110322","tt1905041","tt1596343","tt2103281","tt0396171","tt0421715","tt0814314","tt0480249","tt0343818","tt0181689","tt2106476","tt0381061","tt1392214","tt0443706","tt0945513"]
 
 
-# recommend_like_counter = recommend(user_like_movie_id_list)
-# final_result = recommend(user_like_movie_id_list)
-# recommend_dislike_counter = recommend(user_dislike_movie_id_list)
+recommend_result = recommend(user_like_movie_id_list, 10)
 
 
-# final_result = combine_like_dislike(recommend_like_counter, recommend_dislike_counter)
-# print final_result
 
 
 
