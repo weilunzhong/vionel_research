@@ -1,68 +1,65 @@
 body {
-    background-color: black;
-    /*height: 100%;*/
+    background-color: black
 }
 
 .navbar {
-    background-color: #032339;
     padding-left: 50px;
     padding-right: 50px;
+    background-color: #032339
 }
 
 .main-box {
     margin-top: 100px;
     margin-bottom: 50px;
-    background-color: #032339;
     min-height: 500px;
-    padding: 0;
+    padding: 30px 0 0;
     border-radius: 30px;
-    padding-top: 30px;
+    background-color: #032339
 }
 
 .jumbotron {
-    background-color: transparent;
-    color: white;
     padding-top: 20px;
+    background-color: transparent;
+    color: white
 }
 
 #logo {
     position: relative;
-    background-color: #123E5C;
+    top: 5px;
     border-radius: 15px;
     height: 42px;
     width: 180px;
     text-align: center;
     line-height: 42px;
-    top: 5px;
+    background-color: #123E5C
 }
 
 h1 {
-    margin-bottom: 70px;
+    margin-bottom: 70px
 }
 
-/*************搜索框*******/
 .submit-area {
-    width: 1050px;
     overflow: hidden;
+    width: 1050px
 }
 
 .submit-area div.input-area {
     float: left;
-    background-color: white;
     width: 850px;
     height: 43px;
     border-radius: 10px;
-    padding: 8px 0 8px 0;
+    padding: 8px 0;
+    background-color: white
 }
 
 .submit-area div.input-area input {
     height: 27px;
     width: 800px;
     color: black;
-    border:none;
+    border: none;
     font-size: 1.2em;
     font-family: Lato;
-    outline: 0;
+    outline: 0
 }
 
 .rc-num-area {
@@ -72,8 +69,7 @@ h1 {
     background-color: white;
     border-radius: 10px;
     padding: 8px 5px 8px 5px;
-    margin-left: 10px;
-
+    margin-left: 10px
 }
 
 .rc-num-area input {
@@ -82,28 +78,19 @@ h1 {
     font-size: 1.2em;
     font-family: Lato;
     color: black;
-    outline: 0;
+    outline: 0
 }
-
 
 .submit-area div.button-area {
     float: right;
     background-color: #123E5C;
-    /*background-color: transparent;*/
     border-radius: 15px;
     height: 43px;
     width: 130px;
     text-align: center;
     line-height: 42px;
-    top: 5px;
-
-    /*-webkit-transition: background-color 1s;*/
+    top: 5px
 }
-
-/*.submit-area div.button-area:hover {
-    background-color: #123E5C;
-}*/
-
 
 .submit-area div.button-area button {
     background-color: transparent;
@@ -111,56 +98,44 @@ h1 {
     height: 43px;
     width: 130px;
     font-family: Lato;
-    font-size: 25px;
+    font-size: 25px
 }
-/**********************/
-
 
 .result-box {
     margin-top: 50px;
     margin-bottom: 50px;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .user-input-poster {
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 20px
 }
 
 .poster-box {
     float: left;
     width: 120px;
     height: 210px;
-    /*background-color: red;*/
     text-align: center;
-    margin-right: 5px;
+    margin-right: 5px
 }
+
 .poster-box img {
     width: 120px;
     height: 180px;
-    border-radius: 5px;
+    border-radius: 5px
 }
 
 .final-recommender {
-    overflow: hidden;
+    overflow: hidden
 }
 
 .section-title {
     text-align: center;
-    padding: 20px 0 20px 0;
+    padding: 20px 0 20px 0
 }
 
 .search-icon {
     color: black;
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 10px
 }
-
-
-
-
-
-
-
-
-
-
