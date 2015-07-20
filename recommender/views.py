@@ -11,10 +11,12 @@ def index(request):
 
 def recommend(request):
     input_movies = request.GET.get('inputMovies')
+    recommend_num = int(request.GET.get('recommendNum'))
+
     input_movie_list = input_movies.split(',')
     trimed_movie_list = map(lambda x: x.strip(), input_movie_list)
 
-    recommend_movie_list = recommender.recommend(trimed_movie_list)
+    recommend_movie_list = recommender.recommend(trimed_movie_list, recommend_num)
 
     movies_to_show = {}
     movies_to_show['input_movie_list'] = trimed_movie_list
