@@ -49,7 +49,7 @@
                         {% for img_name in movies_to_show.input_movie_list %}
                         <div class="poster-box">
                             <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
-                            {{ img_name }}
+                            <a href="http://www.imdb.com/title/{{ img_name }}" target="blank">{{ img_name }}</a>
                         </div>
                         {% endfor %}
                     </div>
@@ -59,7 +59,7 @@
                         {% for img_name in movies_to_show.recommend_moive_list %}
                         <div class="poster-box">
                             <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
-                            {{ img_name }}
+                            <a href="http://www.imdb.com/title/{{ img_name }}" target="blank">{{ img_name }}</a>
                         </div>
                         {% endfor %}
                     </div>
