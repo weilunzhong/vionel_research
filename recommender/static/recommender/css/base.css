@@ -40,7 +40,8 @@ h1 {
 
 .submit-area {
     overflow: hidden;
-    width: 1050px
+    /*width: 1050px*/
+    width: 100%;
 }
 
 .submit-area div.input-area {
@@ -54,7 +55,8 @@ h1 {
 
 .submit-area div.input-area input {
     height: 27px;
-    width: 800px;
+    /*width: 800px;*/
+    width: 94%;
     color: black;
     border: none;
     font-size: 1.2em;
