@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <div class="research_title">
+            <img src="{% static 'images/research_title.jpg' %}">
+        </div>
+        <div class="jumbotron custom-jumbotron">
+            <div class="row custom-row">
+                <div class="col-sm-6">
+                    <a class="feature-box" href="{% url 'index' %}">
+                        <img src="{% static 'images/recommender_feature.jpg' %}">
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a class="feature-box">
+                        <img src="{% static 'images/recommender_feature.jpg' %}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

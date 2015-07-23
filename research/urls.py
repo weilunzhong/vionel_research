@@ -21,4 +21,5 @@ urlpatterns = [
 
     url(r'^recommender/$', 'recommender.views.index', name='index'),
     url(r'^recommender/recommend/$', 'recommender.views.recommend'),
+    url(r'^$', 'views.home'),
 ]
