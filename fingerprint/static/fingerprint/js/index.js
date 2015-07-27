@@ -80,7 +80,7 @@ function addsilent() {
     var selected = document.getElementById("target").childNodes;
     dir1 = selected[0].src.replace(".jpg", "/");
     img.src = dir1 + "resize.jpg";
-    img.setAttribute("class", "moving item");
+    img.setAttribute("class", "moving");
     img.id = "big1"
         //img.setAttribute("id", "big");
     img.width = 1200
@@ -94,7 +94,7 @@ function addsilent() {
     var img = document.createElement("img");
     dir2 = selected[1].src.replace(".jpg", "/");
     img.src = dir2 + "resize.jpg";
-    img.setAttribute("class", "moving item");
+    img.setAttribute("class", "moving");
     img.id = "big2"
 
     img.width = 1200
@@ -152,7 +152,7 @@ function adddynamic() {
     for (var i = 0; i < num; i++) {
         var img = document.createElement("img");
         img.src = selected[0].src.replace(".jpg", "/") + "resized/chapter" + i + ".jpg";
-        img.setAttribute("class", "moving item");
+        img.setAttribute("class", "moving");
         src.appendChild(img);
     }
 
@@ -200,7 +200,7 @@ function adddynamic() {
     for (var i = 0; i < num; i++) {
         var img = document.createElement("img");
         img.src = selected[1].src.replace(".jpg", "/") + "resized/chapter" + i + ".jpg";
-        img.setAttribute("class", "moving item");
+        img.setAttribute("class", "moving");
         src.appendChild(img);
     }
 }
