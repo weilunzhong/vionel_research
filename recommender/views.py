@@ -7,7 +7,7 @@ from recommender_libs import recommender
 # Create your views here.
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'recommender/index.html')
 
 def recommend(request):
     input_movies = request.GET.get('inputMovies')
@@ -22,4 +22,4 @@ def recommend(request):
     movies_to_show['input_movie_list'] = trimed_movie_list
     movies_to_show['recommendmovie_score_dict'] = recommendmovie_score_dict
     # print movies_to_show, '=============='
-    return render(request, 'base.html', {'movies_to_show': movies_to_show})
+    return render(request, 'recommender/index.html', {'movies_to_show': movies_to_show})

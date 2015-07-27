@@ -19,7 +19,8 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^recommender/$', 'recommender.views.index', name='index'),
+    url(r'^recommender/$', 'recommender.views.index', name='recommender_index'),
     url(r'^recommender/recommend/$', 'recommender.views.recommend'),
     url(r'^$', 'views.home', name='home'),
+    url(r'^fingerprint/$', 'fingerprint.views.index', name='fingerprint_index'),
 ]

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'recommender',
+    'fingerprint',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,8 +59,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'), 
-            ],
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'recommender/templates/recommender'),
+            os.path.join(BASE_DIR, 'fingerprint/templates/fingerprint'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

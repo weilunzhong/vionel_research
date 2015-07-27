@@ -5,8 +5,6 @@ function select() {
     document.getElementById("target").innerHTML = document.getElementById("target").innerHTML + '<img src="' + src + '"  width="120" height="160">';
     var max = document.getElementById("target").childNodes.length;
     if (max > 2) {
-        //document.getElementById("target").innerHTML=document.getElementById("target").childNodes[1]+document.getElementById("target").childNodes[2]
-        //alert(document.getElementById("target").childNodes[1].src);
         document.getElementById("target").innerHTML = '<img src="' + src + '"  width="120" height="160px">'
     }
 }

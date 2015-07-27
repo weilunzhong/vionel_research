@@ -1,0 +1,24 @@
+body {
+    background-color: black
+}
+
+.navbar {
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: #032339;
+    border: 0;
+}
+
+.custom-li {
+    background-color: #0D3F5A;
+    border-radius: 15px;
+    height: 42px;
+    top: 5px;
+}
+
+.custom-li a {
+    font-size: 1.2em;
+    height: 100%;
+    padding-top: 10px !important;
+    color: white !important;
+}

@@ -1,38 +1,17 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+
+{% block headpart %}
     <link rel="stylesheet" type="text/css" href="{% static 'recommender/css/base.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'recommender/js/base.js' %}"></script>
-    <title></title>
-</head>
-<body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <ul class="nav navbar-nav">
-            <li class="custom-li">
-                <a href="{% url 'home' %}">
-                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                    Home
-                </a>
-            </li>
-        </ul>
-        <ul class="navbar-right">
-            <li>
-                <a href="{% url 'index' %}">
-                    <div id="logo">
-                        <img src="{% static 'recommender/images/Logo.PNG' %}">
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <title>Movie recommender</title>
+{% endblock %}
 
 
-    <div class="container main-box">
+
+{% block featurepage %}
+<div class="container main-box">
         <div class="jumbotron">
             <h1>Recommender System</h1>
             <form action="/recommender/recommend/" method="get">
@@ -80,8 +59,12 @@
             {% endif %}
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
+
+
+
+
+
 
 
 
