@@ -2,6 +2,17 @@ body {
     background-color: black
 }
 
+#logo {
+    position: relative;
+    top: 5px;
+    border-radius: 15px;
+    height: 42px;
+    width: 180px;
+    text-align: center;
+    line-height: 42px;
+    background-color: #123E5C;
+}
+
 .navbar {
     padding-left: 50px;
     padding-right: 50px;

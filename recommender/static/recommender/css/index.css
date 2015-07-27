@@ -15,16 +15,7 @@
     color: white;
 }
 
-#logo {
-    position: relative;
-    top: 5px;
-    border-radius: 15px;
-    height: 42px;
-    width: 180px;
-    text-align: center;
-    line-height: 42px;
-    background-color: #123E5C;
-}
+
 
 h1 {
     margin-bottom: 70px;
