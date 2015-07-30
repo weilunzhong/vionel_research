@@ -2,8 +2,7 @@
 import json
 import math
 import recommender_genres
-import recommender_actors
-import recommender_directors
+from recommender_helper import RecommenderHelper
 from collections import Counter
 import os
 
@@ -110,23 +109,16 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_met
 
     # 以下可分别得到根据genre和mawid推荐出的结果，均为（movied_id: cos_sim_value）这种的字典
     genre_movieid_sim_dict = recommender_genres.recommend(user_liked_movie_id_list)
-    actor_movieid_sim_dict = recommender_actors.recommend(user_liked_movie_id_list)
-    director_movieid_sim_dict = recommender_directors.recommend(user_liked_movie_id_list)
+
+    recommender_helper = RecommenderHelper()
+    actor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "actor")
+    director_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "director")
 
     # num_of_recommended_movies = 15
     result = generate_result(genre_movieid_sim_dict, actor_movieid_sim_dict, director_movieid_sim_dict, num_of_recommended_movies, user_liked_movie_id_list)
 
-    print result["all"]
     return result["all"]
-    # return dict(result[recommend_method]).keys()
 
-
-
-
-def combine_like_dislike(recommend_like_counter, recommend_dislike_counter):
-    tmp_counter = recommend_like_counter - recommend_dislike_counter
-    final_counter = tmp_counter.most_common(10)
-    return final_counter
 
 ###########################################################################
 ###########################################################################

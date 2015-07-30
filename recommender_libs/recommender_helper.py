@@ -92,7 +92,7 @@ class RecommenderHelper:
 
 
 
-    def recommend(self, movieid_list, recommended_by="actor"):
+    def recommend(self, movieid_list, recommended_by):
         movieid_with_featureid_dict = {}
         featureid_with_movieid_dict = {}
         if recommended_by == "actor":
