@@ -1,13 +1,9 @@
 #!coding=utf-8
 import json
 import math
-import recommender_genres
 from recommender_helper import RecommenderHelper
 from collections import Counter
 import os
-
-
-
 
 
 def filter_by_rating_and_releaseyear(combined_movieid_sim_counter):
@@ -62,8 +58,14 @@ def filter_by_language(user_liked_movie_id_list, combined_movieid_sim_counter):
 
 
 
-def generate_result(genre_movieid_sim_dict, actor_movieid_sim_dict, director_movieid_sim_dict, num_of_recommended_movies, user_liked_movie_id_list):
-    # final_cos_sim_dic = {}
+def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_method="all"):
+
+    # 以下可分别得到根据genre和mawid推荐出的结果，均为（movied_id: cos_sim_value）这种的字典
+    recommender_helper = RecommenderHelper()
+    actor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "actor")
+    director_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "director")
+    genre_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "genre")
+
 
     genre_movieid_sim_counter = Counter(genre_movieid_sim_dict)
     actor_movieid_sim_counter = Counter(actor_movieid_sim_dict)
@@ -77,47 +79,23 @@ def generate_result(genre_movieid_sim_dict, actor_movieid_sim_dict, director_mov
         del actor_movieid_sim_counter[key]
         del director_movieid_sim_counter[key]
 
-
-    # print "==="
-    # print genre_movieid_sim_counter.most_common(num_of_recommended_movies)
-    # print actor_movieid_sim_counter.most_common(num_of_recommended_movies)
-    # print director_movieid_sim_counter.most_common(num_of_recommended_movies)
-    # print combined_movieid_sim_counter.most_common(num_of_recommended_movies)
-
     # filter
     # 乘上rating和releaseYear产生的系数
     combined_movieid_sim_counter = filter_by_rating_and_releaseyear(combined_movieid_sim_counter)
     combined_movieid_sim_counter = filter_by_language(user_liked_movie_id_list, combined_movieid_sim_counter)
 
-
     final_co_recommended_movies = combined_movieid_sim_counter.most_common(num_of_recommended_movies)
-    final_genre_recommended_movies = genre_movieid_sim_counter.most_common(num_of_recommended_movies)
-    final_actor_recommended_movies = actor_movieid_sim_counter.most_common(num_of_recommended_movies)
-    final_director_recommended_movies = director_movieid_sim_counter.most_common(num_of_recommended_movies)
+    # final_genre_recommended_movies = genre_movieid_sim_counter.most_common(num_of_recommended_movies)
+    # final_actor_recommended_movies = actor_movieid_sim_counter.most_common(num_of_recommended_movies)
+    # final_director_recommended_movies = director_movieid_sim_counter.most_common(num_of_recommended_movies)
 
-    dic_result = dict()
-    dic_result["all"] = final_co_recommended_movies
-    dic_result["genre"] = final_genre_recommended_movies
-    dic_result["actor"] = final_actor_recommended_movies
-    dic_result["director"] = final_director_recommended_movies
+    result_dict = dict()
+    result_dict["all"] = final_co_recommended_movies
+    # result_dict["genre"] = final_genre_recommended_movies
+    # result_dict["actor"] = final_actor_recommended_movies
+    # result_dict["director"] = final_director_recommended_movies
 
-    return dic_result
-    # return combined_movieid_sim_counter
-
-
-def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_method="all"):
-
-    # 以下可分别得到根据genre和mawid推荐出的结果，均为（movied_id: cos_sim_value）这种的字典
-    genre_movieid_sim_dict = recommender_genres.recommend(user_liked_movie_id_list)
-
-    recommender_helper = RecommenderHelper()
-    actor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "actor")
-    director_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "director")
-
-    # num_of_recommended_movies = 15
-    result = generate_result(genre_movieid_sim_dict, actor_movieid_sim_dict, director_movieid_sim_dict, num_of_recommended_movies, user_liked_movie_id_list)
-
-    return result["all"]
+    return result_dict["all"]
 
 
 ###########################################################################

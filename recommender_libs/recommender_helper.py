@@ -101,6 +101,9 @@ class RecommenderHelper:
         elif recommended_by == "director":
             movieid_with_featureid_dict = self.__jsonfile_to_dict("/imdbid_directors.json")
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/director_imdbids.json")
+        elif recommended_by == "genre":
+            movieid_with_featureid_dict = self.__jsonfile_to_dict("/imdbid_genres.json")
+            featureid_with_movieid_dict = self.__jsonfile_to_dict("/genre_imdbids.json")
         else:
             pass
 
@@ -111,7 +114,6 @@ class RecommenderHelper:
 
         for k, v in movieid_with_featureid_dict.items():
             intersection_list = list(set(v).intersection(set(all_featureid_list)))
-
             if not intersection_list:
                 result_dict[k] = 0
                 continue
@@ -124,16 +126,17 @@ class RecommenderHelper:
 
 
 # movieid_list = ["tt0133093","tt0137523","tt0468569","tt0172495","tt0114369","tt1375666","tt0361862","tt0482571","tt0268978","tt0110322"]
-# movieid_list = ["tt0468569", "tt0137523", "tt0964517", "tt1375666", "tt0172495", "tt0109830", "tt0112573", "tt0120815", "tt0209144", "tt1130884", "tt0372784", "tt0114369", "tt1504320", "tt0454876", "tt0212720", "tt0111161", "tt0099487", "tt1291584", "tt0110322", "tt1905041", "tt1596343", "tt2103281", "tt0396171", "tt0421715", "tt0814314", "tt0480249", "tt0343818", "tt0181689", "tt2106476", "tt0381061", "tt1392214", "tt0443706", "tt0945513"]
+# # movieid_list = ["tt0468569", "tt0137523", "tt0964517", "tt1375666", "tt0172495", "tt0109830", "tt0112573", "tt0120815", "tt0209144", "tt1130884", "tt0372784", "tt0114369", "tt1504320", "tt0454876", "tt0212720", "tt0111161", "tt0099487", "tt1291584", "tt0110322", "tt1905041", "tt1596343", "tt2103281", "tt0396171", "tt0421715", "tt0814314", "tt0480249", "tt0343818", "tt0181689", "tt2106476", "tt0381061", "tt1392214", "tt0443706", "tt0945513"]
 # recommender_helper = RecommenderHelper()
 # recommended_by_actor = recommender_helper.recommend(movieid_list, "actor")
 # recommended_by_director = recommender_helper.recommend(movieid_list, "director")
-
+recommended_by_genre = recommender_helper.recommend(movieid_list, "genre")
 # tmp1 = sorted(recommended_by_actor.iteritems(), key=lambda d:d[1], reverse = True)
 # tmp2 = sorted(recommended_by_director.iteritems(), key=lambda d:d[1], reverse = True)
-
+tmp3 = sorted(recommended_by_genre.iteritems(), key=lambda d:d[1], reverse = True)
 # print tmp1[:10]
 # print tmp2[:10]
+print tmp3[:10]
 
 
 

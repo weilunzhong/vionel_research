@@ -99,6 +99,18 @@ def generate_imdbid_genrevector(imdbid_genres_dict):
         imdbid_genrevector_file.write(imdbid_genrevector_json + "\n")
 
 
+def generate_imdbid_genres(imdbid_genres_dict):
+    imdbid_genres_json = json.dumps(imdbid_genres_dict)
+    with open("imdbid_genres.json", "w") as imdbid_genres_file:
+        imdbid_genres_file.write(imdbid_genres_json)
+
+def generate_genre_imdbids(imdbid_genres_dict):
+    genre_imdbids_dict = exchange_key_value_of_dict(imdbid_genres_dict)
+    genre_imdbids_json = json.dumps(genre_imdbids_dict)
+    with open("genre_imdbids.json", "w") as genre_imdbids_file:
+        genre_imdbids_file.write(genre_imdbids_json)
+
+
 def generate_imdbid_language(imdbid_language_dict):
     imdbid_language_json = json.dumps(imdbid_language_dict)
     with open("imdbid_language.json", "w") as imdbid_language_file:
@@ -142,7 +154,13 @@ def transform(all_movies_file_path):
     # generate_mainactor_imdbids(imdbid_mainactors_dict)
 
     # # 生成imdbid_genrevector
-    generate_imdbid_genrevector(imdbid_genres_dict)
+    # generate_imdbid_genrevector(imdbid_genres_dict)
+
+    # 生成imdbid_genres.json
+    generate_imdbid_genres(imdbid_genres_dict)
+
+    # 生成genre_imdbids.json
+    generate_genre_imdbids(imdbid_genres_dict)
 
     # 生成imdbid_language
     # generate_imdbid_language(imdbid_language_dict)
