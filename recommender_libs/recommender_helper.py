@@ -130,13 +130,13 @@ class RecommenderHelper:
 # recommender_helper = RecommenderHelper()
 # recommended_by_actor = recommender_helper.recommend(movieid_list, "actor")
 # recommended_by_director = recommender_helper.recommend(movieid_list, "director")
-recommended_by_genre = recommender_helper.recommend(movieid_list, "genre")
-# tmp1 = sorted(recommended_by_actor.iteritems(), key=lambda d:d[1], reverse = True)
-# tmp2 = sorted(recommended_by_director.iteritems(), key=lambda d:d[1], reverse = True)
-tmp3 = sorted(recommended_by_genre.iteritems(), key=lambda d:d[1], reverse = True)
-# print tmp1[:10]
-# print tmp2[:10]
-print tmp3[:10]
+# recommended_by_genre = recommender_helper.recommend(movieid_list, "genre")
+# # tmp1 = sorted(recommended_by_actor.iteritems(), key=lambda d:d[1], reverse = True)
+# # tmp2 = sorted(recommended_by_director.iteritems(), key=lambda d:d[1], reverse = True)
+# tmp3 = sorted(recommended_by_genre.iteritems(), key=lambda d:d[1], reverse = True)
+# # print tmp1[:10]
+# # print tmp2[:10]
+# print tmp3[:10]
 
 
 
