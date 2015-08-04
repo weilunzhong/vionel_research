@@ -4,6 +4,8 @@ import json
 import math
 import os
 
+from recommender_db import RecommenderDB
+
 
 class RecommenderHelper:
 
@@ -93,16 +95,18 @@ class RecommenderHelper:
 
 
     def recommend(self, movieid_list, recommended_by):
+        recommenderdb = RecommenderDB()
+
         movieid_with_featureid_dict = {}
         featureid_with_movieid_dict = {}
+
+        movieid_with_featureid_dict = recommenderdb.get_imdbid_feature_dict(recommended_by)
+
         if recommended_by == "actor":
-            movieid_with_featureid_dict = self.__jsonfile_to_dict("/imdbid_mainactors.json")
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/mainactor_imdbids.json")
         elif recommended_by == "director":
-            movieid_with_featureid_dict = self.__jsonfile_to_dict("/imdbid_directors.json")
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/director_imdbids.json")
         elif recommended_by == "genre":
-            movieid_with_featureid_dict = self.__jsonfile_to_dict("/imdbid_genres.json")
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/genre_imdbids.json")
         else:
             pass

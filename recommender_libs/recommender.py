@@ -2,15 +2,16 @@
 import json
 import math
 from recommender_helper import RecommenderHelper
+from recommender_db import RecommenderDB
 from collections import Counter
 import os
 
 
 def filter_by_rating_and_releaseyear(combined_movieid_sim_counter):
-    imdbrating_file = open(os.path.split(os.path.realpath(__file__))[0] + "/imdbid_ratings.json")
-    imdbrating_dict = json.loads(imdbrating_file.readline())
-    movieid_releaseyear_file = open(os.path.split(os.path.realpath(__file__))[0] + "/imdbid_releaseyear.json")
-    movieid_releaseyear_dict = json.loads(movieid_releaseyear_file.readline())
+    recommenderdb = RecommenderDB()
+    imdbrating_dict = recommenderdb.get_imdbid_feature_dict("rating")
+    movieid_releaseyear_dict = recommenderdb.get_imdbid_feature_dict("releaseyear")
+
     for item in combined_movieid_sim_counter:
         try:
             combined_movieid_sim_counter[item] *= imdbrating_dict[item]
@@ -29,8 +30,8 @@ def filter_by_rating_and_releaseyear(combined_movieid_sim_counter):
 
 
 def filter_by_language(user_liked_movie_id_list, combined_movieid_sim_counter):
-    with open(os.path.split(os.path.realpath(__file__))[0] + "/imdbid_language.json") as imdbid_language_file:
-        imdbid_language_dict = json.loads(imdbid_language_file.readline())
+    recommenderdb = RecommenderDB()
+    imdbid_language_dict = recommenderdb.get_imdbid_feature_dict("language")
 
     languages_in_liked_list = []
     for item in user_liked_movie_id_list:
