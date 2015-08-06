@@ -157,13 +157,43 @@ def transform(all_movies_file_path):
     # generate_imdbid_genrevector(imdbid_genres_dict)
 
     # 生成imdbid_genres.json
-    generate_imdbid_genres(imdbid_genres_dict)
+    # generate_imdbid_genres(imdbid_genres_dict)
 
     # 生成genre_imdbids.json
-    generate_genre_imdbids(imdbid_genres_dict)
+    # generate_genre_imdbids(imdbid_genres_dict)
 
     # 生成imdbid_language
     # generate_imdbid_language(imdbid_language_dict)
+
+def generate_imdbid_keywords(keyword_imdbids_json):
+    keyword_imdbids_dict = {}
+    imdbid_keywords_dict = {}
+    with open(keyword_imdbids_json) as keyword_imdbids_file:
+        for line in keyword_imdbids_file:
+            item = json.loads(line)
+            keyword = item["keyword"]
+            imdbids = item["imdbid"]
+
+            keyword_imdbids_dict[keyword] = imdbids
+
+    imdbid_keywords_dict = exchange_key_value_of_dict(keyword_imdbids_dict)
+    imdbid_keywords_json = json.dumps(imdbid_keywords_dict)
+    with open("imdbid_keywords.json", "w") as imdbid_keywords_file:
+        imdbid_keywords_file.write(imdbid_keywords_json)
+
+
+def add_keywords_to_allmovies(imdbid_keywords_json):
+    with open(imdbid_keywords_json) as imdbid_keywords_file, open("all_movies.dat") as all_movies_file:
+        imdbid_keywords_dict = json.loads(imdbid_keywords_file.readline())
+        for line in all_movies_file:
+            movie = json.loads(line)
+            imdbid = movie["imdbId"]
+            try:
+                movie["keywords"] = imdbid_keywords_dict[imdbid]
+            except KeyError:
+                print imdbid
+
+
 
 
 ###############################################################################################
@@ -171,6 +201,8 @@ def transform(all_movies_file_path):
 
 
 
-transform("all_movies.dat")
+# transform("all_movies.dat")
+# generate_imdbid_keywords("keyword_imdbids.json")
+add_keywords_to_allmovies("imdbid_keywords.json")
 
 
