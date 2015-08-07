@@ -187,11 +187,17 @@ def add_keywords_to_allmovies(imdbid_keywords_json):
         imdbid_keywords_dict = json.loads(imdbid_keywords_file.readline())
         
         all10_movies_imdbids = []
+        all10_movies_dict = {} # 变成大json
         for item1 in all10_movies_file:
             movie = json.loads(item1)
-            all10_movies_imdbids.append(movie["imdbId"])
+            # 变成大json
+            imdbid = movie["imdbId"]
+            all10_movies_dict[imdbid] = movie
+
+            all10_movies_imdbids.append(imdbid)
         imdbid_keywords_dict_keys = imdbid_keywords_dict.keys()
         print len(all10_movies_imdbids) # 105051
+        print len(all10_movies_dict) # 105051
         print len(imdbid_keywords_dict_keys) # 110140
 
         # 在all中但不在keywords中的
@@ -205,60 +211,51 @@ def add_keywords_to_allmovies(imdbid_keywords_json):
 
         print len(list1) # 68114
         print len(list2) # 73203
-        print len(list3)
+        print len(list3) # 36937
 
         # 并集
         union_list = list(set(all10_movies_imdbids).union(set(imdbid_keywords_dict_keys)))
         print len(union_list) # 178254
 
         
-        
 
+        new_all10_movies_file = open("new_all10_movies.json", "w")
+        for union_item in union_list:
+            new_movie_dict = {}
+            print union_item
+            if union_item in list2: # 如果在keywords中不在all中
+                new_movie_dict["imdbid"] = union_item
+                new_movie_dict["imdbMainactors"] = []
+                new_movie_dict["imdbRating"] = []
+                new_movie_dict["imdbDirectors"] = []
+                new_movie_dict["releaseYear"] = []
+                new_movie_dict["genres"] = []
+                new_movie_dict["language"] = []
+                new_movie_dict["keywords"] = imdbid_keywords_dict[union_item]
+            if union_item in list1: # 如果在all中不在keywords中
+                new_movie_dict["imdbid"] = union_item
+                new_movie_dict["imdbMainactors"] = all10_movies_dict[union_item]["imdbMainactors"]
+                new_movie_dict["imdbRating"] = all10_movies_dict[union_item]["imdbRating"]
+                new_movie_dict["imdbDirectors"] = all10_movies_dict[union_item]["imdbDirectors"]
+                new_movie_dict["releaseYear"] = all10_movies_dict[union_item]["releaseYear"]
+                new_movie_dict["genres"] = all10_movies_dict[union_item]["genres"]
+                new_movie_dict["language"] = all10_movies_dict[union_item]["language"]
+                new_movie_dict["keywords"] = []
+            if union_item in list3:
+                new_movie_dict["imdbid"] = union_item
+                new_movie_dict["imdbMainactors"] = all10_movies_dict[union_item]["imdbMainactors"]
+                new_movie_dict["imdbRating"] = all10_movies_dict[union_item]["imdbRating"]
+                new_movie_dict["imdbDirectors"] = all10_movies_dict[union_item]["imdbDirectors"]
+                new_movie_dict["releaseYear"] = all10_movies_dict[union_item]["releaseYear"]
+                new_movie_dict["genres"] = all10_movies_dict[union_item]["genres"]
+                new_movie_dict["language"] = all10_movies_dict[union_item]["language"]
+                new_movie_dict["keywords"] = imdbid_keywords_dict[union_item]
 
-    with open("all10_movies.dat") as all10_movies_file:
-        new_movie_dict = {}
-        for item2 in all10_movies_file:
-            
-
-        for item2 in union_list:
-            if item2 in list3:
-                new_movie_dict["imdbId"] = 
-            new_movie_dict["imdbMainactors"] = []
-            new_movie_dict["imdbRating"] = []
-            new_movie_dict["imdbDirectors"] = []
-            new_movie_dict["releaseYear"] = []
-            new_movie_dict["genres"] = []
-            new_movie_dict["language"] = []
-            new_movie_dict["country"] = []
-            new_movie_dict["keywords"] = imdbid_keywords_dict[i]
-
-
-
-
-
-        # 在imdbid_keywords里， 不在all10_movies里的id, 加入到all10_movies里面
-    #     movie1 = {}
-    #     for i in imdbid_tmp:
-    #         print i, "-"
-    #         movie1["imdbId"] = i
-    #         movie1["imdbMainactors"] = []
-    #         movie1["imdbRating"] = []
-    #         movie1["imdbDirectors"] = []
-    #         movie1["releaseYear"] = []
-    #         movie1["genres"] = []
-    #         movie1["language"] = []
-    #         movie1["country"] = []
-    #         movie1["keywords"] = imdbid_keywords_dict[i]
-    #         all_movie_list.append(movie1)
-
-    #     print len(all_movie_list)
-
-    # with open("new_all10_movies.dat") as new_all10_movies_file:
-    #     for new_item in all_movie_list:
-    #         new_item_json = json.dumps(new_item)
-    #         new_all10_movies_file.write(new_item_json + "\n")
-        
-
+            # 把这一行写入文件
+            new_movie_json = json.dumps(new_movie_dict)
+            new_all10_movies_file.write(new_movie_json + "\n")
+        new_all10_movies_file.close()
+        print len(new_movie_dict)
 
 
 
