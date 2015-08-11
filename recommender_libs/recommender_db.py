@@ -35,5 +35,5 @@ class RecommenderDB:
             result_dict[imdbid] = feature
         return result_dict
 
-recommenderdb = RecommenderDB()
-print recommenderdb.get_imdbid_feature_dict("genre")
+# recommenderdb = RecommenderDB()
+# print recommenderdb.get_imdbid_feature_dict("genre")

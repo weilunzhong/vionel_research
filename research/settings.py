@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     'recommender',
     'fingerprint',
+    'boxer',
 )
 
 MIDDLEWARE_CLASSES = (
