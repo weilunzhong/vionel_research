@@ -260,6 +260,24 @@ def add_keywords_to_allmovies(imdbid_keywords_json):
 
 
 
+def create_new_movie_file(input_file1, input_file2):
+    with open(input_file1) as imdbid_keywords_file, open(input_file2) as all10_movies_file, open("movies.txt", "w") as movies_file:
+        imdbid_keywords_dict = json.loads(imdbid_keywords_file.readline())
+        count = 0
+        for line in all10_movies_file:
+            count = count + 1
+            print count
+            movie = json.loads(line)
+            imdbid = movie["imdbId"]
+            try:
+                movie["keywords"] = imdbid_keywords_dict[imdbid]
+            except KeyError:
+                movie["keywords"] = []
+            movie_json = json.dumps(movie)
+            movies_file.write(movie_json + "\n")
+            
+
+
 ###############################################################################################
 
 
@@ -267,6 +285,6 @@ def add_keywords_to_allmovies(imdbid_keywords_json):
 
 # transform("all_movies.dat")
 # generate_imdbid_keywords("keyword_imdbids.json")
-add_keywords_to_allmovies("imdbid_keywords.json")
-
+# add_keywords_to_allmovies("imdbid_keywords.json")
+create_new_movie_file("imdbid_keywords.json", "all10_movies.dat")
 
