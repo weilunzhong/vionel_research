@@ -66,19 +66,20 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_met
     actor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "actor")
     director_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "director")
     genre_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "genre")
-
+    # keyword_movieid_sim_dict = recommender_helper.recommend(user_like_movie_id_list, "keyword")
 
     genre_movieid_sim_counter = Counter(genre_movieid_sim_dict)
     actor_movieid_sim_counter = Counter(actor_movieid_sim_dict)
     director_movieid_sim_counter = Counter(director_movieid_sim_dict)
+    # keyword_movieid_sim_counter = Counter(keyword_movieid_sim_dict)
 
     combined_movieid_sim_counter = genre_movieid_sim_counter + actor_movieid_sim_counter + director_movieid_sim_counter
 
     for key in user_liked_movie_id_list:
         del combined_movieid_sim_counter[key]
-        del genre_movieid_sim_counter[key]
-        del actor_movieid_sim_counter[key]
-        del director_movieid_sim_counter[key]
+        # del genre_movieid_sim_counter[key]
+        # del actor_movieid_sim_counter[key]
+        # del director_movieid_sim_counter[key]
 
     # filter
     # 乘上rating和releaseYear产生的系数
@@ -114,6 +115,8 @@ user_like_movie_id_list = ["tt0133093","tt0137523","tt0468569","tt0172495","tt01
 
 
 recommend_result = recommend(user_like_movie_id_list, 10)
+
+# print recommend_result
 
 
 

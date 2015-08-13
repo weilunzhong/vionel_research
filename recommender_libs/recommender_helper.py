@@ -108,6 +108,8 @@ class RecommenderHelper:
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/director_imdbids.json")
         elif recommended_by == "genre":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/genre_imdbids.json")
+        elif recommended_by == "keyword":
+            featureid_with_movieid_dict = self.__jsonfile_to_dict("/keyword_imdbids.json")
         else:
             pass
 
