@@ -40,7 +40,7 @@ INSTALLED_APPS = (
 
     'recommender',
     'fingerprint',
-    'boxer',
+    'moviedetail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +63,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'recommender/templates/recommender'),
             os.path.join(BASE_DIR, 'fingerprint/templates/fingerprint'),
+            os.path.join(BASE_DIR, 'fingerprint/templates/moviedetail'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

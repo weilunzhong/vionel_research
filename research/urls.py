@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^recommender/recommend/$', 'recommender.views.recommend'),
     url(r'^$', 'views.home', name='home'),
     url(r'^fingerprint/$', 'fingerprint.views.index', name='fingerprint_index'),
+    url(r'^moviedetail/$', 'moviedetail.views.index', name='moviedetail_index'),
 ]

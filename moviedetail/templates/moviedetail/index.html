@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block headpart %}
+    <link rel="stylesheet" type="text/css" href="{% static 'moviedetail/css/index.css' %}">
+    <script src="{% static 'moviedetail/js/index.js' %}"></script>
+    <script src="{% static 'moviedetail/layer/layer.js' %}"></script>
+    <title>Movie recommender</title>
+{% endblock %}
+
+
+
+{% block featurepage %}
+<div class="container main-box">
+
+        <div class="basic-info">
+            <div class="poster">
+                <img src="{% static 'moviedetail/images/tt2637276.jpg' %}">
+            </div>
+            <div class="info-detail">
+                <h1>Ted 2</h1>
+                <div>
+                    Released<span class="year-tag">2014</span>
+                    Genres<span class="genre-tag">Genre1</span><span class="genre-tag">Genre2</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup-area">
+            <div id="fingerprint">
+                <img src="{% static 'moviedetail/images/fingerprint_feature.png' %}">
+            </div>
+        </div>
+
+</div>
+{% endblock %}

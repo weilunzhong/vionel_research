@@ -1,0 +1,84 @@
+.main-box {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    min-height: 500px;
+    padding: 30px 0 0;
+    border-radius: 30px;
+    background-color: #032339;
+}
+
+.basic-info {
+    overflow: hidden;
+    padding: 20px 50px 50px;
+    border-bottom-style: solid;
+    border-bottom-color: #031520;
+}
+
+.poster {
+    float: left;
+    background: black;
+    width: 178px;
+    height: 270px;
+
+}
+
+.poster img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.info-detail {
+    color: white;
+    float: left;
+    padding: 0px 30px;
+}
+
+.info-detail div {
+    overflow: hidden;
+    padding-left: 0;
+    height: 30px;
+    line-height: 30px;
+    font-family: Lato,Helvetica,sans-serif;
+    color: #eee;
+}
+
+.info-detail div span {
+    margin: 0px 5px;
+    list-style: none;
+}
+
+.year-tag {
+    background-color: #f88529;
+    border: 1px solid;
+    border-color: #faa15a;
+    padding: 2px 20px 3px 20px;
+    border-radius: 10px;
+    color: #222;
+}
+
+.genre-tag {
+    background-color: #2ba8e2;
+    border: 1px solid;
+    border-color: #58bae8;
+    padding: 2px 20px 3px 20px;
+    border-radius: 10px;
+    color: #222;
+}
+
+.popup-area {
+    overflow: hidden;
+    padding: 50px;
+    border-bottom-style: solid;
+    border-bottom-color: #031520;
+}
+
+.popup-area div {
+    width: 300px;
+    height: 200px;
+}
+
+.popup-area div img {
+    width: 100%;
+    height: 100%;
+}
