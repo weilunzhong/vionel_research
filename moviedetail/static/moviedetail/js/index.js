@@ -3,7 +3,7 @@ $(function() {
         var url = "http://" + window.location.host + "/fingerprint";
         layer.open({
             type: 2,
-            title: '',
+            title: 'Movie fingerprint demo',
             shadeClose: true,
             shade: false,
             maxmin: true, //开启最大化最小化按钮
