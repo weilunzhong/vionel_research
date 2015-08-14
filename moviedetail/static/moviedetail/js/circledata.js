@@ -6,8 +6,9 @@ $(document).ready(function() {
     for (var i=0; i<circle_divs.length; i++) {
         var circle = circle_divs[i];
 
-        var deg = circle.innerHTML;
-        var degNum = deg.substring(0, deg.length - 1);
+        var prec = circle.innerHTML;
+        var precNum = prec.substring(0, prec.length - 1);
+        var degNum = precNum * 360 / 100;
         var activeBorder = circle.parentNode.parentNode;
         // alert(activeBorder.nodeName);
         if (degNum <= 180){
