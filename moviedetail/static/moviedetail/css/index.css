@@ -7,7 +7,7 @@
     background-color: #032339;
 }
 
-.basic-info {
+.feature-block {
     overflow: hidden;
     padding: 20px 50px 50px;
     border-bottom-style: solid;
@@ -66,19 +66,20 @@
     color: #222;
 }
 
-.popup-area {
-    overflow: hidden;
-    padding: 50px;
-    border-bottom-style: solid;
-    border-bottom-color: #031520;
-}
-
-.popup-area div {
+#fingerprint {
     width: 300px;
     height: 200px;
 }
 
-.popup-area div img {
+#fingerprint img {
     width: 100%;
     height: 100%;
+}
+
+.color-title {
+    float: left;
+    font-size: 30px;
+    color: white;
+    height: 60px;
+    line-height: 60px;
 }

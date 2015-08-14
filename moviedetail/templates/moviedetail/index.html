@@ -4,8 +4,10 @@
 
 {% block headpart %}
     <link rel="stylesheet" type="text/css" href="{% static 'moviedetail/css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'moviedetail/css/circledata.css' %}">
     <script src="{% static 'moviedetail/js/index.js' %}"></script>
     <script src="{% static 'moviedetail/layer/layer.js' %}"></script>
+    <script src="{% static 'moviedetail/js/circledata.js' %}"></script>
     <title>Movie recommender</title>
 {% endblock %}
 
@@ -14,7 +16,7 @@
 {% block featurepage %}
 <div class="container main-box">
 
-        <div class="basic-info">
+        <div class="feature-block">
             <div class="poster">
                 <img src="{% static 'moviedetail/images/tt2637276.jpg' %}">
             </div>
@@ -27,7 +29,30 @@
             </div>
         </div>
 
-        <div class="popup-area">
+        <div class="feature-block">
+            <div>
+                <div class="color-title">Darkness</div>
+                <div id="activeBorder" class="active-border">
+                    <div class="circle">
+                        <span class="prec">49%</span>
+                    </div>
+                </div>
+                <div id="activeBorder" class="active-border">
+                    <div class="circle">
+                        <span class="prec">75%</span>
+                    </div>
+                </div>
+                <div id="activeBorder" class="active-border">
+                    <div class="circle">
+                        <span class="prec">39%</span>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="feature-block">
             <div id="fingerprint">
                 <img src="{% static 'moviedetail/images/fingerprint_feature.png' %}">
             </div>
