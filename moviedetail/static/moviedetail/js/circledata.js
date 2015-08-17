@@ -13,10 +13,8 @@ $(document).ready(function() {
         // alert(activeBorder.nodeName);
         if (degNum <= 180){
             activeBorder.style.backgroundImage = 'linear-gradient(' + (+90 + +degNum) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)';
-            // activeBorder.css('background-image','linear-gradient(' + (90+degNum) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
         } else {
             activeBorder.style.backgroundImage = 'linear-gradient(' + (+degNum - +90) + 'deg, transparent 50%, #39B4CC 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)';
-            // activeBorder.css('background-image','linear-gradient(' + (degNum-90) + 'deg, transparent 50%, #39B4CC 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
         }
     }
 
