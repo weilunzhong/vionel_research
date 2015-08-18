@@ -121,3 +121,18 @@
     line-height: 60px;
     margin-right: 20px;
 }
+
+.movie-box {
+    float: left;
+    width: 120px;
+    height: 210px;
+    text-align: center;
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+.movie-box img {
+    width: 120px;
+    height: 180px;
+    border-radius: 5px;
+}
