@@ -13,3 +13,4 @@ build/
 tests/report/
 posters
 fingerprint/static/fingerprint/images
+moviedetail/static/moviedetail/images

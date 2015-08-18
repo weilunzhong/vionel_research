@@ -8,6 +8,8 @@
     <script src="{% static 'moviedetail/js/index.js' %}"></script>
     <script src="{% static 'moviedetail/layer/layer.js' %}"></script>
     <script src="{% static 'moviedetail/js/circledata.js' %}"></script>
+    <script src="{% static 'moviedetail/js/fingerprint.js' %}"></script>
+    <script src="{% static 'moviedetail/js/mouseover_popup.js' %}"></script>
     <title>Movie recommender</title>
 {% endblock %}
 
@@ -18,10 +20,10 @@
 
     <div class="feature-block">
         <div class="poster">
-            <img src="{% static 'moviedetail/images/tt2637276.jpg' %}">
+            <img id="moviePoster" src="{% static 'moviedetail/images/fingerprint/2001 A Space Odyssey (1968).jpg' %}">
         </div>
         <div class="info-detail">
-            <h1>Ted 2</h1>
+            <h1>2001 A Space Odyssey (1968)</h1>
             <div>
                 Released<span class="year-tag">2014</span>
                 Genres<span class="genre-tag">Genre1</span><span class="genre-tag">Genre2</span>
@@ -153,8 +155,26 @@
     </div>
 
     <div class="feature-block">
-        <div id="fingerprint">
-            <img src="{% static 'moviedetail/images/fingerprint_feature.png' %}">
+        <div class="item">
+            <div id='moviefingerprint1'></div>
+            <div id="preview_div">
+                <!-- <div class="border_preview" style="width: 300px;height: 100px;">
+                    <div id="loader_container">
+                        <div id="loader">
+                            <div align="center">Loading image preview...</div>
+                            <div id="loader_bg">
+                                <div id="progress"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="preview_temp_load">
+                    <img id="small" onload="javascript:remove_loading();" border="0">
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div id='moviefingerprint2' class="wave_area"></div>
         </div>
     </div>
 
