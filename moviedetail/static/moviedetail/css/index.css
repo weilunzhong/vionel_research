@@ -131,6 +131,11 @@
     width: 100%;
 }
 
+.preview_temp_load {
+    text-align: center;
+}
+
+
 .moving {
 
     position: relative;
@@ -145,4 +150,11 @@
     padding: 0px;
     /*border: 1px solid #aaaaaa;*/
 
+}
+
+#small {
+    width: 310px;
+    height: 139px;
+    background-color: black;
+    border: none;
 }

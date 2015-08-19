@@ -29,17 +29,19 @@ function truebody() {
 
 
 function hidetrail() {
-	gettrailobj().display = "none";
+	// gettrailobj().display = "none";
 	document.onmousemove = ""
-	gettrailobj().left = "-500px"
+	// gettrailobj().left = "-500px"
 	clearTimeout(timer);
 }
 
 function showtrail() {
+	gettrailobj().display = "";
 	timer = setTimeout("show();", 200);
 }
 
 function show() {
+	// gettrailobj().display = "none";
 	document.onmousemove = followmouse;
 }
 

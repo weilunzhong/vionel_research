@@ -29,18 +29,15 @@ var step = 1
 function disp() {
 
     step = step + 1;
-    //var step=1; // Change this step value
-    //alert("Hello");
     var elems = document.getElementsByClassName('moving');
 
     for (var i = 0; i < elems.length; i++) {
-        //alert(elems[i].height);  
+
         var y = elems[i].offsetTop;
         var x = elems[i].offsetLeft;
-        //elems[i].height=elems[i].height/2
-        // alert(x + "tt" + y);
+
         y = 150 - elems[i].height / 2 + 100 * elems[i].height / 400 * Math.sin(step * elems[i].height * Math.PI / 5000);
-        // document.getElementsByClassName('moving')[i].style.top = y + "px"; // vertical movment
+
         elems[i].style.top = y + "px";
     }
 
@@ -53,9 +50,6 @@ function disp() {
 
 function timer() {
     disp();
-    //var y=document.getElementsByClassName('moving')[0].offsetTop;
-    //var x=document.getElementsByClassName('moving')[0].offsetLeft;
-    //document.getElementById("msg").innerHTML="X: " + x + " Y : " + y
     my_time = setTimeout('timer()', 2);
 }
 

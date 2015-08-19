@@ -5,11 +5,14 @@
 {% block headpart %}
     <link rel="stylesheet" type="text/css" href="{% static 'moviedetail/css/index.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'moviedetail/css/circledata.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'moviedetail/css/keyword_node.css' %}">
     <script src="{% static 'moviedetail/js/index.js' %}"></script>
     <script src="{% static 'moviedetail/layer/layer.js' %}"></script>
     <script src="{% static 'moviedetail/js/circledata.js' %}"></script>
     <script src="{% static 'moviedetail/js/fingerprint.js' %}"></script>
     <script src="{% static 'moviedetail/js/mouseover_popup.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="{% static 'moviedetail/js/keyword_node.js' %}"></script>
     <title>Movie recommender</title>
 {% endblock %}
 
@@ -158,16 +161,6 @@
         <div class="item">
             <div id='moviefingerprint1'></div>
             <div id="preview_div">
-                <!-- <div class="border_preview" style="width: 300px;height: 100px;">
-                    <div id="loader_container">
-                        <div id="loader">
-                            <div align="center">Loading image preview...</div>
-                            <div id="loader_bg">
-                                <div id="progress"> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="preview_temp_load">
                     <img id="small" onload="javascript:remove_loading();" border="0">
                 </div>
@@ -175,6 +168,13 @@
         </div>
         <div class="item">
             <div id='moviefingerprint2' class="wave_area"></div>
+        </div>
+        <input type="button" class="btn btn-primary" onClick="timer();" value='Start'>
+    </div>
+
+    <div class="feature-block">
+        <div class="item">
+
         </div>
     </div>
 
