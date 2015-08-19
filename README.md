@@ -14,6 +14,10 @@ This is a research project of VionLabs. My task is to build the recommender syst
 ####Fingerprint page
 ![image](https://github.com/codermango/vionel_research/raw/master/readme_images/fingerprint_page.png)
 
+####Moviedetail page
+![image](https://github.com/codermango/vionel_research/raw/master/readme_images/moviedetail_page.png)
+
+
 For now, there are two main directions that are under research. Movie Recommender and Movie Fingerprint. 
 
 ##Recommender System
