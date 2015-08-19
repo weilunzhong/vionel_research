@@ -10,7 +10,7 @@ var displayduration = 0; //duration in seconds image should remain visible. 0 fo
 var defaultimageheight = 40; // maximum image size.
 var defaultimagewidth = 40; // maximum image size.
 
-var timer;
+var timer1;
 
 function gettrailobj() {
 	if (document.getElementById)
@@ -32,12 +32,12 @@ function hidetrail() {
 	// gettrailobj().display = "none";
 	document.onmousemove = ""
 	// gettrailobj().left = "-500px"
-	clearTimeout(timer);
+	clearTimeout(timer1);
 }
 
 function showtrail() {
 	gettrailobj().display = "";
-	timer = setTimeout("show();", 200);
+	timer1 = setTimeout("show();", 200);
 }
 
 function show() {
@@ -89,7 +89,7 @@ function followmouse(e) {
 
 	gettrailobj().left = xcoord + "px"
 	gettrailobj().top = ycoord + "px"
-	var fnum = (xxcoord - 335) * rratio
+	var fnum = (xxcoord - 400) * rratio
 	fnum = Math.floor(fnum / 100) * 100
 	document.getElementById("small").src = dir + "t/" + fnum + ".jpg"
 	document.getElementById("small").width = "310"
