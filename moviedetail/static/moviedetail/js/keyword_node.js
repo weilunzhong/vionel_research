@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
     var width = 1170;
-    var height = 500;
+    var height = 700;
 
     var color = d3.scale.category20();
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
         var poster = d3.select("body").append("div").attr("class", "node-poster")
         node.on("mouseover", function(d) {
             poster.html("<img src='/static/moviedetail/images/tt2637276.jpg'>")
-                  .style("left", (d3.event.pageX) + "px")     
+                  .style("left", (d3.event.pageX) + "px")
                   .style("top", (d3.event.pageY) + "px"); 
         });
         node.on("mouseout", function(d) {
