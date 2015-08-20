@@ -14,24 +14,23 @@
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-    <ul class="nav navbar-nav">
-        <li class="custom-li">
-            <a href="{% url 'home' %}">
-                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                Home
-            </a>
-        </li>
-    </ul>
-    <ul class="navbar-right">
-        <li>
-            <a href="{% url 'recommender_index' %}">
-                <div id="logo">
-                    <img src="{% static 'recommender/images/Logo.PNG' %}">
-                </div>
-            </a>
-        </li>
-    </ul>
-</nav>
+        <ul class="nav navbar-nav">
+            <li class="nav-backhome">
+                <a href="{% url 'home' %}">
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-right">
+            <li>
+                <a href="{% url 'home' %}">
+                    <div id="logo">
+                        <img src="{% static 'images/logo.png' %}">
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     {% block featurepage %}
     {% endblock %}

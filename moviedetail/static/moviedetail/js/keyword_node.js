@@ -2,7 +2,6 @@
 $(document).ready(function() {
     var width = 1170;
     var height = 500;
-    var filePath = location.host + "/static/moviedetail/data/keyword.json";
 
     var color = d3.scale.category20();
 
@@ -47,6 +46,9 @@ $(document).ready(function() {
                   .style("top", (d3.event.pageY) + "px"); 
         });
         node.on("mouseout", function(d) {
+            poster.html("");
+        });
+        node.on("drag", function(d) {
             poster.html("");
         });
 

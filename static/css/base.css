@@ -3,33 +3,37 @@ body {
 }
 
 #logo {
-    position: relative;
-    top: 5px;
-    border-radius: 15px;
-    height: 42px;
-    width: 180px;
-    text-align: center;
-    line-height: 42px;
-    background-color: #123E5C;
+    background-color: transparent;
 }
 
 .navbar {
     padding-left: 50px;
     padding-right: 50px;
-    background-color: #032339;
+    background-color: rgba(3,30,48,0.8);
     border: 0;
+    height: 80px;
 }
 
-.custom-li {
-    background-color: #0D3F5A;
-    border-radius: 15px;
-    height: 42px;
-    top: 5px;
-}
-
-.custom-li a {
+.nav-backhome a {
     font-size: 1.2em;
-    height: 100%;
-    padding-top: 10px !important;
     color: white !important;
+    line-height: 3px !important;
+    height: 80px;
+}
+
+
+.navbar-right {
+    margin: 0;
+    padding: 0;
+    line-height: 80px;
+}
+
+.navbar-nav {
+    margin: 0;
+    padding: 0;
+    line-height: 80px;
+}
+
+.glyphicon-arrow-left {
+    font-size: 3em;
 }
