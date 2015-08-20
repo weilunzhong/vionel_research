@@ -33,12 +33,22 @@ $(document).ready(function() {
             .data(graph.nodes)
             .enter().append("circle")
             .attr("class", "node")
-            .attr("r", 5)
+            .attr("r", 10)
             .style("fill", function(d) { return color(d.group); })
             .call(force.drag);
 
-        node.append("svg:title")
-            .text(function(d) { return d.title; });
+        // node.append("svg:title")
+        //     .text(function(d) { return d.title; });
+
+        var poster = d3.select("body").append("div").attr("class", "node-poster")
+        node.on("mouseover", function(d) {
+            poster.html("<img src='/static/moviedetail/images/tt2637276.jpg'>")
+                  .style("left", (d3.event.pageX) + "px")     
+                  .style("top", (d3.event.pageY) + "px"); 
+        });
+        node.on("mouseout", function(d) {
+            poster.html("");
+        });
 
         force.on("tick", function() {
             link.attr("x1", function(d) { return d.source.x; })
