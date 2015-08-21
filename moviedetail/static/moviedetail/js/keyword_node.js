@@ -14,7 +14,7 @@ $(document).ready(function() {
         .attr("width", width)
         .attr("height", height);
 
-    d3.json("/static/moviedetail/data/keyword.json", function(error, graph) {
+    d3.json("/static/moviedetail/data/new_keyword.json", function(error, graph) {
         if (error) throw error;
 
         force
@@ -36,19 +36,26 @@ $(document).ready(function() {
             .style("fill", function(d) { return color(d.group); })
             .call(force.drag);
 
-        // node.append("svg:title")
-        //     .text(function(d) { return d.title; });
+        node.append("svg:title")
+            .text(function(d) {
+                var group = d.group
+                if (group == 0) {
+                    return d.title;
+                } 
+                 
+            });
 
         var poster = d3.select("body").append("div").attr("class", "node-poster")
         node.on("mouseover", function(d) {
-            poster.html("<img src='/static/moviedetail/images/tt2637276.jpg'>")
+            var imdbid = d.imdbid
+            var group = d.group
+            if (group != 0) {
+                poster.html("<img src='/static/images/posters/" + imdbid + ".jpg'>")
                   .style("left", (d3.event.pageX) + "px")
                   .style("top", (d3.event.pageY) + "px"); 
+            } 
         });
         node.on("mouseout", function(d) {
-            poster.html("");
-        });
-        node.on("drag", function(d) {
             poster.html("");
         });
 

@@ -47,6 +47,7 @@ body {
     color: white;
     float: left;
     padding: 0px 30px;
+    bottom: 0;
 }
 
 .info-detail div {

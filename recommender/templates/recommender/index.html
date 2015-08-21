@@ -36,7 +36,7 @@
                         <div class="section-title"><h2>User Like Movies</h2></div>
                         {% for img_name in movies_to_show.input_movie_list %}
                         <div class="poster-box">
-                            <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
+                            <img src="{% static 'images/posters/' %}{{ img_name }}.jpg">
                             <a href="http://www.imdb.com/title/{{ img_name }}" target="blank">{{ img_name }}</a>
                         </div>
                         {% endfor %}
@@ -46,7 +46,7 @@
                         <div class="section-title"><h2>Final Recommended Movies</h2></div>
                         {% for img_name, score in movies_to_show.recommendmovie_score_dict %}
                         <div class="poster-box">
-                            <img src="{% static 'recommender/images/posters/' %}{{ img_name }}.jpg">
+                            <img src="{% static 'images/posters/' %}{{ img_name }}.jpg">
                             <a href="http://www.imdb.com/title/{{ img_name }}" target="blank">{{ img_name }}</a>
                             <br>
                             <label>{{ score }}</label>
