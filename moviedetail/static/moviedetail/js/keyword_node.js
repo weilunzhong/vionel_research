@@ -58,6 +58,12 @@ $(document).ready(function() {
         node.on("mouseout", function(d) {
             poster.html("");
         });
+        node.on("click", function(d) {
+            if (d.group != 0) {
+                var url = "http://www.imdb.com/title/" + d.imdbid;
+                window.open(url, '_blank');
+            }
+        });
 
         force.on("tick", function() {
             link.attr("x1", function(d) { return d.source.x; })
