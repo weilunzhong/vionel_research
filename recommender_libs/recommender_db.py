@@ -9,7 +9,7 @@ class RecommenderDB:
     def __init__(self):
         client = MongoClient()
         self.db = client.VionelMovies
-        self.collection = self.db.allMovies
+        self.collection = self.db.boxerMovies
 
     def get_imdbid_feature_dict(self, feature_name):
         result_dict = {}
@@ -26,6 +26,8 @@ class RecommenderDB:
             feature_key = "imdbRating"
         elif feature_name == "releaseyear":
             feature_key = "releaseYear"
+        elif feature_name == "keyword":
+            feature_key = "keywords"
             
         all_movies_list = list(self.collection.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
 

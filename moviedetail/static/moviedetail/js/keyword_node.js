@@ -62,6 +62,9 @@ $(document).ready(function() {
             if (d.group != 0) {
                 var url = "http://www.imdb.com/title/" + d.imdbid;
                 window.open(url, '_blank');
+            } else {
+                var url = "https://en.wikipedia.org/w/index.php?curid=" + d.wikiid;
+                window.open(url, '_blank');
             }
         });
 
