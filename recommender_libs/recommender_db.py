@@ -9,7 +9,7 @@ class RecommenderDB:
     def __init__(self):
         client = MongoClient()
         self.db = client.VionelMovies
-        self.collection = self.db.boxerMovies
+        self.collection = self.db.all3Movies
 
     def get_imdbid_feature_dict(self, feature_name):
         result_dict = {}
