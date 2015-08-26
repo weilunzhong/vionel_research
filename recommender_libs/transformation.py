@@ -286,7 +286,7 @@ def create_new_movie_file(input_file1, input_file2):
 
 
 
-transform("all3_movies.dat")
+transform("boxer_movies.dat")
 # generate_imdbid_keywords("keyword_imdbids.json")
 # add_keywords_to_allmovies("imdbid_keywords.json")
 # create_new_movie_file("imdbid_keywords.json", "all10_movies.dat")
