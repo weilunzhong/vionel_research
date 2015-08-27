@@ -14,6 +14,8 @@ def recommend(request):
     recommend_num = int(request.GET.get('recommendNum'))
 
     input_movie_list = input_movies.split(',')
+    if len(input_movie_list) == 1:
+        input_movie_list.append(input_movie_list[0])
     trimed_movie_list = map(lambda x: x.strip(), input_movie_list)
 
     recommendmovie_score_dict = recommender.recommend(trimed_movie_list, recommend_num)
