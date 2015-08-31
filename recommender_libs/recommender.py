@@ -58,15 +58,36 @@ def filter_by_language(user_liked_movie_id_list, combined_movieid_sim_counter):
     return combined_movieid_sim_counter
 
 
+def reason_of_recommendation(final_co_recommended_movies, genre_movieid_sim_counter, actor_movieid_sim_counter, director_movieid_sim_counter, keyword_movieid_sim_counter):
+    reason_tuple_list = []
+    score_dict = {}
+    for key in final_co_recommended_movies:
+        imdbid = key[0]
+        score_dict["genre"] = genre_movieid_sim_counter[imdbid]
+        score_dict["actor"] = actor_movieid_sim_counter[imdbid]
+        score_dict["director"] = director_movieid_sim_counter[imdbid]
+        score_dict["keyword"] = keyword_movieid_sim_counter[imdbid]
+        sorted_score_dict = sorted(score_dict.iteritems(), key=lambda d:d[1], reverse=True)
+        reason_list = []
+        
+        for item in sorted_score_dict[:2]:
+            if item[1] != 0:
+                reason_list.append(item[0])
+        reason_tuple_list.append((key[0], reason_list,))
 
-def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_method="all"):
+    print reason_tuple_list
+    return reason_tuple_list
+
+
+
+def recommend(user_liked_movie_id_list, num_of_recommended_movies):
 
     # 以下可分别得到根据genre和mawid推荐出的结果，均为（movied_id: cos_sim_value）这种的字典
     recommender_helper = RecommenderHelper()
     actor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "actor")
     director_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "director")
     genre_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "genre")
-    keyword_movieid_sim_dict = recommender_helper.recommend(user_like_movie_id_list, "keyword")
+    keyword_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "keyword")
 
     genre_movieid_sim_counter = Counter(genre_movieid_sim_dict)
     actor_movieid_sim_counter = Counter(actor_movieid_sim_dict)
@@ -77,9 +98,12 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_met
 
     for key in user_liked_movie_id_list:
         del combined_movieid_sim_counter[key]
-        # del genre_movieid_sim_counter[key]
-        # del actor_movieid_sim_counter[key]
-        # del director_movieid_sim_counter[key]
+        del genre_movieid_sim_counter[key]
+        del actor_movieid_sim_counter[key]
+        del director_movieid_sim_counter[key]
+        del keyword_movieid_sim_counter[key]
+
+    
 
     # filter
     # 乘上rating和releaseYear产生的系数
@@ -87,36 +111,20 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies, recommend_met
     combined_movieid_sim_counter = filter_by_language(user_liked_movie_id_list, combined_movieid_sim_counter)
 
     final_co_recommended_movies = combined_movieid_sim_counter.most_common(num_of_recommended_movies)
-    # final_genre_recommended_movies = genre_movieid_sim_counter.most_common(num_of_recommended_movies)
-    # final_actor_recommended_movies = actor_movieid_sim_counter.most_common(num_of_recommended_movies)
-    # final_director_recommended_movies = director_movieid_sim_counter.most_common(num_of_recommended_movies)
+
+    # get the features that have the top two scores.
+    reason_tuple_list = reason_of_recommendation(final_co_recommended_movies, genre_movieid_sim_counter, actor_movieid_sim_counter, director_movieid_sim_counter, keyword_movieid_sim_counter)
 
     result_dict = dict()
-    result_dict["all"] = final_co_recommended_movies
-    # result_dict["genre"] = final_genre_recommended_movies
-    # result_dict["actor"] = final_actor_recommended_movies
-    # result_dict["director"] = final_director_recommended_movies
+    result_dict["movie"] = final_co_recommended_movies
+    result_dict["reason"] = reason_tuple_list
 
-    return result_dict["all"]
+    return result_dict
 
 
 ###########################################################################
 ###########################################################################
 
-
-
-
-
-
-
-user_like_movie_id_list = ["tt0133093","tt0137523","tt0468569","tt0172495","tt0114369","tt1375666","tt0361862","tt0482571","tt0268978","tt0110322"]
-#user_like_movie_id_list = ["tt0468569","tt0137523","tt0114369","tt0110322","tt0172495","tt0133093","tt1375666","tt1345836","tt0109830","tt0814314"]
-# user_like_movie_id_list = ["tt0468569", "tt0137523", "tt0964517","tt1375666","tt0172495","tt0109830","tt0112573","tt0120815","tt0209144","tt1130884","tt0372784","tt0114369","tt1504320","tt0454876","tt0212720","tt0111161","tt0099487","tt1291584","tt0110322","tt1905041","tt1596343","tt2103281","tt0396171","tt0421715","tt0814314","tt0480249","tt0343818","tt0181689","tt2106476","tt0381061","tt1392214","tt0443706","tt0945513"]
-
-
-recommend_result = recommend(user_like_movie_id_list, 10)
-
-# print recommend_result
 
 
 
