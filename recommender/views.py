@@ -25,6 +25,8 @@ def recommend_page(request):
 
     movies_to_show = {}
     movies_to_show['input_movie_list'] = trimed_movie_list
-    movies_to_show['recommend_dict'] = result_dict
-    # print movies_to_show, '=============='
+    movies_to_show['recommend_tuple_list'] = movie_score_dict
+    movies_to_show['reason_tuple_list'] = movie_reason_dict
+
+    print movies_to_show, '=============='
     return render(request, 'recommender/index.html', {'movies_to_show': movies_to_show})

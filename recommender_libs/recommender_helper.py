@@ -102,14 +102,16 @@ class RecommenderHelper:
 
         movieid_with_featureid_dict = recommenderdb.get_imdbid_feature_dict(recommended_by)
 
-        if recommended_by == "actor":
+        if recommended_by == "imdb_actor":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/mainactor_imdbids.json")
-        elif recommended_by == "director":
+        elif recommended_by == "imdb_director":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/director_imdbids.json")
-        elif recommended_by == "genre":
+        elif recommended_by == "imdb_genre":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/genre_imdbids.json")
-        elif recommended_by == "keyword":
+        elif recommended_by == "imdb_keyword":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/keyword_imdbids.json")
+        elif recommended_by == "wiki_keyword":
+            featureid_with_movieid_dict = self.__jsonfile_to_dict("/wikikeyword_imdbids.json")
         else:
             pass
 
