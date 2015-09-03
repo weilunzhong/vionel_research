@@ -30,6 +30,8 @@ class RecommenderDB:
             feature_key = "imdbKeywords"
         elif feature_name == "wiki_keyword":
             feature_key = "wikiKeywords"
+        elif feature_name == "vionel_theme":
+            feature_key = "vionelThemes"
             
         all_movies_list = list(self.collection.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
 

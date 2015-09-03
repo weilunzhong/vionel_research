@@ -112,8 +112,9 @@ class RecommenderHelper:
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/keyword_imdbids.json")
         elif recommended_by == "wiki_keyword":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/wikikeyword_imdbids.json")
-        else:
-            pass
+        elif recommended_by == "vionel_theme":
+            featureid_with_movieid_dict = self.__jsonfile_to_dict("/vioneltheme_imdbids.json")
+
 
         featureid_with_number_dict = self.__intersection_of_values_for_certain_keys(movieid_list, movieid_with_featureid_dict)
 

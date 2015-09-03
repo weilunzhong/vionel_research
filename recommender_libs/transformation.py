@@ -102,6 +102,13 @@ def generate_wikikeyword_imdbids(imdbid_wikikeywords_dict):
         wikikeyword_imdbids_file.write(wikikeyword_imdbids_json)
 
 
+def generate_vioneltheme_imdbids(imdbid_vioneltheme_dict):
+    vioneltheme_imdbids_dict = exchange_key_value_of_dict(imdbid_vioneltheme_dict)
+    vioneltheme_imdbids_json = json.dumps(vioneltheme_imdbids_dict)
+    with open("vioneltheme_imdbids.json", "w") as vioneltheme_imdbids_file:
+        vioneltheme_imdbids_file.write(vioneltheme_imdbids_json)
+
+
 def transform(all_movies_file_path):
 
     imdbid_directors_dict = {}
@@ -112,6 +119,7 @@ def transform(all_movies_file_path):
     imdbid_language_dict = {}
     imdbid_keywords_dict = {}
     imdbid_wikikeywords_dict = {}
+    imdbid_vioneltheme_dict = {}
 
     with open(all_movies_file_path) as all_movies_file:
         for line in all_movies_file:
@@ -125,6 +133,7 @@ def transform(all_movies_file_path):
             language = movie["language"]
             keywords = movie["imdbKeywords"]
             wikikeywords = movie["wikiKeywords"]
+            vionelthemes = movie["vionelThemes"]
 
             imdbid_directors_dict[imdbid] = directors
             imdbid_mainactors_dict[imdbid] = mainactors
@@ -134,6 +143,7 @@ def transform(all_movies_file_path):
             imdbid_language_dict[imdbid] = language
             imdbid_keywords_dict[imdbid] = keywords
             imdbid_wikikeywords_dict[imdbid] = wikikeywords
+            imdbid_vioneltheme_dict[imdbid] = vionelthemes
 
     # generate_imdbid_directors(imdbid_directors_dict)
     # generate_imdbid_mainactors(imdbid_mainactors_dict)
@@ -150,6 +160,7 @@ def transform(all_movies_file_path):
     # 生成keyword_imdbids
     generate_keyword_imdbids(imdbid_keywords_dict)
     generate_wikikeyword_imdbids(imdbid_wikikeywords_dict)
+    generate_vioneltheme_imdbids(imdbid_vioneltheme_dict)
 
 ###############################################################################################
 
@@ -174,7 +185,12 @@ def generate_movie_information(infile):
             for item in movie["wikikeywords"]:
                 wikikeyword_list.append(item["keywordWikiId"])
 
+            vioneltheme_list = []
+            for theme in movie["vionelThemes"]:
+                vioneltheme_list.append(theme["vionelThemeID"])
+
             output_dict["wikiKeywords"] = wikikeyword_list
+            output_dict["vionelThemes"] = vioneltheme_list
 
             output_json = json.dumps(output_dict)
             boxer_movies_information_file.write(output_json + "\n")
