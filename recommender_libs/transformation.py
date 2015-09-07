@@ -3,6 +3,7 @@ import json
 import math
 from collections import Counter
 import os
+import recommender
 
 
 
@@ -198,6 +199,96 @@ def generate_movie_information(infile):
 
 
 
+def createweight():
+    movie_list = []
+    feature_maxscore_dict = {}
+
+    actor_score_list = []
+    director_score_list = []
+    genre_score_list = []
+    imdbkeyword_score_list = []
+    wikikeyword_score_list = []
+    vioneltheme_score_list = []
+
+
+    with open("boxer_movies_information.dat") as boxer_movies_information_file:
+        for line in boxer_movies_information_file:
+            movie = json.loads(line)
+            imdbid = movie["imdbId"]
+            movie_list.append(imdbid)
+            
+        max_actorscore = 0
+        max_directorscore = 0
+        max_genrescore = 0
+        max_imdbkeywordscore = 0
+        max_wikikeywordscore = 0
+        max_vionelthemescore = 0
+
+    count = 0
+
+    for imdbid in movie_list:
+        feature_counter_dict = recommender.getallsimscore([imdbid, imdbid])
+        actorscore = max(dict(feature_counter_dict["imdb_actor"]).values())
+        directorscore = max(dict(feature_counter_dict["imdb_director"]).values())
+        genrescore = max(dict(feature_counter_dict["imdb_genre"]).values())
+        imdbkeywordscore = max(dict(feature_counter_dict["imdb_keyword"]).values())
+        wikikeywordscore = max(dict(feature_counter_dict["wiki_keyword"]).values())
+        vionelthemescore = max(dict(feature_counter_dict["vionel_theme"]).values())
+
+        # if max_actorscore < actorscore:
+        #     max_actorscore = actorscore
+        # elif max_directorscore < directorscore:
+        #     max_directorscore = directorscore
+        # elif max_genrescore < genrescore:
+        #     max_genrescore = genrescore
+        # elif max_imdbkeywordscore < imdbkeywordscore:
+        #     max_imdbkeywordscore = imdbkeywordscore
+        # elif max_wikikeywordscore < wikikeywordscore:
+        #     max_wikikeywordscore = wikikeywordscore
+        # elif max_vionelthemescore < vionelthemescore:
+        #     max_vionelthemescore = vionelthemescore
+
+
+        actor_score_list.append(actorscore)
+        director_score_list.append(directorscore)
+        genre_score_list.append(genrescore)
+        imdbkeyword_score_list.append(imdbkeywordscore)
+        wikikeyword_score_list.append(wikikeywordscore)
+        vioneltheme_score_list.append(vionelthemescore)
+
+        count += 1
+        print count
+        # print max_genrescore
+        # print max_actorscore
+        # print max_directorscore
+        # print max_imdbkeywordscore
+        # print max_wikikeywordscore
+        # print max_vionelthemescore
+        # print 
+        print genrescore
+        print actorscore
+        print directorscore
+        print imdbkeywordscore
+        print wikikeywordscore
+        print vionelthemescore
+        print 
+
+
+    print sum(actor_score_list) / len(actor_score_list)
+    print sum(director_score_list) / len(director_score_list)
+    print sum(genre_score_list) / len(genre_score_list)
+    print sum(imdbkeyword_score_list) / len(imdbkeyword_score_list)
+    print sum(wikikeyword_score_list) / len(wikikeyword_score_list)
+    print sum(vioneltheme_score_list) / len(vioneltheme_score_list)
+
+    # feature_maxscore_dict["imdbActor"] = max_actorscore
+    # feature_maxscore_dict["imdbDirector"] = max_directorscore
+    # feature_maxscore_dict["imdbGenre"] = max_genrescore
+    # feature_maxscore_dict["imdbKeyword"] = max_genrescore
+    # feature_maxscore_dict["wikiKeyword"] = max_wikikeywordscore
+    # feature_maxscore_dict["vionelTheme"] = max_vionelthemescore
+
+    # print feature_maxscore_dict
 
 
 
@@ -207,8 +298,7 @@ def generate_movie_information(infile):
 
 
 
-
-transform("boxer_movies_information.dat")
+# transform("boxer_movies_information.dat")
 # generate_movie_information("boxer_movies.dat")
-
+createweight()
 
