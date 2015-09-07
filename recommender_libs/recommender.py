@@ -123,12 +123,12 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies):
 
     # 以下可分别得到根据genre和mawid推荐出的结果，均为（movied_id: cos_sim_value）这种的字典
     recommender_helper = RecommenderHelper()
-    imdbactor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "imdb_actor")
-    imdbdirector_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "imdb_director")
-    imdbgenre_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "imdb_genre")
-    imdbkeyword_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "imdb_keyword")
-    wikikeyword_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "wiki_keyword")
-    vioneltheme_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "vionel_theme")
+    imdbactor_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "actor")
+    imdbdirector_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "director")
+    imdbgenre_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "genre")
+    imdbkeyword_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "imdbkeyword")
+    wikikeyword_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "wikikeyword")
+    vioneltheme_movieid_sim_dict = recommender_helper.recommend(user_liked_movie_id_list, "vioneltheme")
 
     imdbgenre_movieid_sim_counter = Counter(imdbgenre_movieid_sim_dict)
     imdbactor_movieid_sim_counter = Counter(imdbactor_movieid_sim_dict)
@@ -161,6 +161,7 @@ def recommend(user_liked_movie_id_list, num_of_recommended_movies):
     all_feature_counter_list = [final_co_recommended_movies, imdbgenre_movieid_sim_counter, imdbactor_movieid_sim_counter, imdbdirector_movieid_sim_counter, imdbkeyword_movieid_sim_counter, wikikeyword_movieid_sim_counter, vioneltheme_movieid_sim_counter]
     reason_tuple_list = reason_of_recommendation(all_feature_counter_list)
 
+    # print reason_tuple_list
     result_dict = dict()
     result_dict["movie"] = final_co_recommended_movies
     result_dict["reason"] = reason_tuple_list

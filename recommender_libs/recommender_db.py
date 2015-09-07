@@ -14,11 +14,11 @@ class RecommenderDB:
     def get_imdbid_feature_dict(self, feature_name):
         result_dict = {}
         feature_key = ""
-        if feature_name == "imdb_actor":
+        if feature_name == "actor":
             feature_key = "imdbActors"
-        elif feature_name == "imdb_director":
+        elif feature_name == "director":
             feature_key = "imdbDirectors"
-        elif feature_name == "imdb_genre":
+        elif feature_name == "genre":
             feature_key = "imdbGenres"
         elif feature_name == "language":
             feature_key = "language"
@@ -26,11 +26,11 @@ class RecommenderDB:
             feature_key = "imdbRating"
         elif feature_name == "releaseyear":
             feature_key = "releaseYear"
-        elif feature_name == "imdb_keyword":
+        elif feature_name == "imdbkeyword":
             feature_key = "imdbKeywords"
-        elif feature_name == "wiki_keyword":
+        elif feature_name == "wikikeyword":
             feature_key = "wikiKeywords"
-        elif feature_name == "vionel_theme":
+        elif feature_name == "vioneltheme":
             feature_key = "vionelThemes"
             
         all_movies_list = list(self.collection.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))

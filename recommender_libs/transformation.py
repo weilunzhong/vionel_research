@@ -51,7 +51,7 @@ def transform(all_movies_file_path):
     imdbid_releaseyear_dict = {}
     imdbid_genres_dict = {}
     imdbid_language_dict = {}
-    imdbid_keywords_dict = {}
+    imdbid_imdbkeywords_dict = {}
     imdbid_wikikeywords_dict = {}
     imdbid_vioneltheme_dict = {}
 
@@ -75,19 +75,19 @@ def transform(all_movies_file_path):
             imdbid_releaseyear_dict[imdbid] = releaseyear
             imdbid_genres_dict[imdbid] = genres
             imdbid_language_dict[imdbid] = language
-            imdbid_keywords_dict[imdbid] = keywords
+            imdbid_imdbkeywords_dict[imdbid] = keywords
             imdbid_wikikeywords_dict[imdbid] = wikikeywords
             imdbid_vioneltheme_dict[imdbid] = vionelthemes
 
     
 
 
-    genreate_feature_imdbids(imdbid_directors_dict, "director_imdbids.json")
-    genreate_feature_imdbids(imdbid_actors_dict, "actor_imdbids.json")
-    genreate_feature_imdbids(imdbid_genres_dict, "genre_imdbids.json")
-    genreate_feature_imdbids(imdbid_keywords_dict, "keyword_imdbids.json")
-    genreate_feature_imdbids(imdbid_wikikeywords_dict, "wikikeyword_imdbids.json")
-    genreate_feature_imdbids(imdbid_vioneltheme_dict, "vioneltheme_imdbids.json")
+    # genreate_feature_imdbids(imdbid_directors_dict, "director_imdbids.json")
+    # genreate_feature_imdbids(imdbid_actors_dict, "actor_imdbids.json")
+    # genreate_feature_imdbids(imdbid_genres_dict, "genre_imdbids.json")
+    genreate_feature_imdbids(imdbid_imdbkeywords_dict, "imdbkeyword_imdbids.json")
+    # genreate_feature_imdbids(imdbid_wikikeywords_dict, "wikikeyword_imdbids.json")
+    # genreate_feature_imdbids(imdbid_vioneltheme_dict, "vioneltheme_imdbids.json")
 
 
 
@@ -225,8 +225,8 @@ def createweight():
 
 
 
-
-transform("boxer_movies_information.dat")
 # generate_movie_information("boxer_movies.dat")
+# transform("boxer_movies_information.dat")
+
 # createweight()
 
