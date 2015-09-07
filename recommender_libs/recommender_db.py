@@ -15,7 +15,7 @@ class RecommenderDB:
         result_dict = {}
         feature_key = ""
         if feature_name == "imdb_actor":
-            feature_key = "imdbMainactors"
+            feature_key = "imdbActors"
         elif feature_name == "imdb_director":
             feature_key = "imdbDirectors"
         elif feature_name == "imdb_genre":
