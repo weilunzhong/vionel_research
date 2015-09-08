@@ -96,8 +96,11 @@ class RecommenderHelper:
     def __comparison_score(self, movieid_list, movieid_with_featureid_dict):
         input_movie_features = []
         for item in movieid_list:
-            feature_list = movieid_with_featureid_dict[item]
-            input_movie_features += feature_list
+            try:
+                feature_list = movieid_with_featureid_dict[item]
+                input_movie_features += feature_list
+            except KeyError:
+                continue
         input_movie_features = list(set(input_movie_features))
 
         result_dict = {}
