@@ -54,40 +54,39 @@ def transform(all_movies_file_path):
     imdbid_imdbkeywords_dict = {}
     imdbid_wikikeywords_dict = {}
     imdbid_vioneltheme_dict = {}
+    imdbid_vionelscene_dict = {}
+    imdbid_locationcountry_dict = {}
+    imdbid_locationcity_dict = {}
 
     with open(all_movies_file_path) as all_movies_file:
         for line in all_movies_file:
             movie = json.loads(line)
             imdbid = movie["imdbId"]
-            actors = movie["imdbActors"]
-            ratings = movie["imdbRating"]
-            directors = movie["imdbDirectors"]
-            releaseyear = movie["releaseYear"]
-            genres = movie["imdbGenres"]
-            language = movie["language"]
-            keywords = movie["imdbKeywords"]
-            wikikeywords = movie["wikiKeywords"]
-            vionelthemes = movie["vionelThemes"]
 
-            imdbid_directors_dict[imdbid] = directors
-            imdbid_actors_dict[imdbid] = actors
-            imdbid_ratings_dict[imdbid] = ratings
-            imdbid_releaseyear_dict[imdbid] = releaseyear
-            imdbid_genres_dict[imdbid] = genres
-            imdbid_language_dict[imdbid] = language
-            imdbid_imdbkeywords_dict[imdbid] = keywords
-            imdbid_wikikeywords_dict[imdbid] = wikikeywords
-            imdbid_vioneltheme_dict[imdbid] = vionelthemes
-
+            imdbid_directors_dict[imdbid] = movie["imdbDirectors"]
+            imdbid_actors_dict[imdbid] = movie["imdbActors"]
+            imdbid_ratings_dict[imdbid] = movie["imdbRating"]
+            imdbid_releaseyear_dict[imdbid] = movie["releaseYear"]
+            imdbid_genres_dict[imdbid] = movie["imdbGenres"]
+            imdbid_language_dict[imdbid] = movie["language"]
+            imdbid_imdbkeywords_dict[imdbid] = movie["imdbKeywords"]
+            imdbid_wikikeywords_dict[imdbid] = movie["wikiKeywords"]
+            imdbid_vioneltheme_dict[imdbid] = movie["vionelThemes"]
+            imdbid_vionelscene_dict[imdbid] = movie["vionelScene"]
+            imdbid_locationcity_dict[imdbid] = movie["locationCity"]
+            imdbid_locationcountry_dict[imdbid] = movie["locationCountry"]
     
 
 
     # genreate_feature_imdbids(imdbid_directors_dict, "director_imdbids.json")
     # genreate_feature_imdbids(imdbid_actors_dict, "actor_imdbids.json")
     # genreate_feature_imdbids(imdbid_genres_dict, "genre_imdbids.json")
-    genreate_feature_imdbids(imdbid_imdbkeywords_dict, "imdbkeyword_imdbids.json")
+    # genreate_feature_imdbids(imdbid_imdbkeywords_dict, "imdbkeyword_imdbids.json")
     # genreate_feature_imdbids(imdbid_wikikeywords_dict, "wikikeyword_imdbids.json")
     # genreate_feature_imdbids(imdbid_vioneltheme_dict, "vioneltheme_imdbids.json")
+    # genreate_feature_imdbids(imdbid_vionelscene_dict, "vionelscene_imdbids.json")
+    genreate_feature_imdbids(imdbid_locationcity_dict, "locationcity_imdbids.json")
+    genreate_feature_imdbids(imdbid_locationcountry_dict, "locationcountry_imdbids.json")
 
 
 
@@ -96,7 +95,10 @@ def transform(all_movies_file_path):
 
 def generate_movie_information(infile):
     with open(infile) as infile_file, open("boxer_movies_information.dat", "w") as boxer_movies_information_file:
+        count = 0
         for line in infile_file:
+            count += 1
+            print count
 
             movie = json.loads(line)
 
@@ -118,8 +120,24 @@ def generate_movie_information(infile):
             for theme in movie["vionelThemes"]:
                 vioneltheme_list.append(theme["vionelThemeID"])
 
+            locationcountry_list = movie["locationCountry"].values() + movie["locationCity"].values() + movie["locationState"].values()
+            locationcity_list = movie["locationCity"].keys() + movie["locationState"].keys()
+            vionelscene_list = movie["vionScene"].keys()
+
+            locationcountry_list = list(set(locationcountry_list))
+            locationcity_list = list(set(locationcity_list))
+
+            print locationcountry_list
+            print locationcity_list
+            print vionelscene_list
+            print
+
+
             output_dict["wikiKeywords"] = wikikeyword_list
             output_dict["vionelThemes"] = vioneltheme_list
+            output_dict["locationCountry"] = locationcountry_list
+            output_dict["locationCity"] = locationcity_list
+            output_dict["vionelScene"] = vionelscene_list
 
             output_json = json.dumps(output_dict)
             boxer_movies_information_file.write(output_json + "\n")
@@ -225,8 +243,8 @@ def createweight():
 
 
 
-# generate_movie_information("boxer_movies.dat")
-# transform("boxer_movies_information.dat")
+# generate_movie_information("boxer_movies.json")
+transform("boxer_movies_information.dat")
 
 # createweight()
 

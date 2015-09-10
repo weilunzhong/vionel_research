@@ -22,7 +22,7 @@ class RecommenderDB:
             feature_key = "imdbGenres"
         elif feature_name == "language":
             feature_key = "language"
-        elif feature_name == "imdb_rating":
+        elif feature_name == "imdbrating":
             feature_key = "imdbRating"
         elif feature_name == "releaseyear":
             feature_key = "releaseYear"
@@ -32,9 +32,15 @@ class RecommenderDB:
             feature_key = "wikiKeywords"
         elif feature_name == "vioneltheme":
             feature_key = "vionelThemes"
+        elif feature_name == "vionelscene":
+            feature_key = "vionelScene"
+        elif feature_name == "locationcity":
+            feature_key = "locationCity"
+        elif feature_name == "locationcountry":
+            feature_key = "locationCountry"
             
         all_movies_list = list(self.collection.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
-
+        # print all_movies_list
         for movie in all_movies_list:
             imdbid = movie["imdbId"]
             feature = movie[feature_key]
@@ -42,4 +48,4 @@ class RecommenderDB:
         return result_dict
 
 # recommenderdb = RecommenderDB()
-# print recommenderdb.get_imdbid_feature_dict("genre")
+# recommenderdb.get_imdbid_feature_dict("actor")

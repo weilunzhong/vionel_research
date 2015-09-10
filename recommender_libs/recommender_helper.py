@@ -134,7 +134,7 @@ class RecommenderHelper:
         #     featureid_with_movieid_dict = self.__jsonfile_to_dict("/vioneltheme_imdbids.json")
 
         result_dict = {}
-        if recommended_by == "director" or recommended_by == "genre":
+        if recommended_by == "director" or recommended_by == "genre" or recommended_by == "locationcountry" or recommended_by == "locationcity" or recommended_by == "vionelscene":
             featureid_with_movieid_dict = self.__jsonfile_to_dict("/" + recommended_by + "_imdbids.json")
             featureid_with_number_dict = self.__intersection_of_values_for_certain_keys(movieid_list, movieid_with_featureid_dict)
 
