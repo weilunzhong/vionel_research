@@ -116,6 +116,8 @@ user_like_movie_id_list = ["tt0133093","tt0137523","tt0468569","tt0172495","tt01
 
 recommend_result = recommend(user_like_movie_id_list, 10)
 
+print recommend_result
+
 # print recommend_result
 
 
