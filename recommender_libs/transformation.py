@@ -57,6 +57,7 @@ def transform(all_movies_file_path):
     imdbid_vionelscene_dict = {}
     imdbid_locationcountry_dict = {}
     imdbid_locationcity_dict = {}
+    imdbid_mainactors_dict = {}
 
     with open(all_movies_file_path) as all_movies_file:
         for line in all_movies_file:
@@ -75,7 +76,7 @@ def transform(all_movies_file_path):
             imdbid_vionelscene_dict[imdbid] = movie["vionelScene"]
             imdbid_locationcity_dict[imdbid] = movie["locationCity"]
             imdbid_locationcountry_dict[imdbid] = movie["locationCountry"]
-    
+            imdbid_mainactors_dict[imdbid] = movie["imdbMainactors"]
 
 
     # genreate_feature_imdbids(imdbid_directors_dict, "director_imdbids.json")
@@ -85,8 +86,9 @@ def transform(all_movies_file_path):
     # genreate_feature_imdbids(imdbid_wikikeywords_dict, "wikikeyword_imdbids.json")
     # genreate_feature_imdbids(imdbid_vioneltheme_dict, "vioneltheme_imdbids.json")
     # genreate_feature_imdbids(imdbid_vionelscene_dict, "vionelscene_imdbids.json")
-    genreate_feature_imdbids(imdbid_locationcity_dict, "locationcity_imdbids.json")
-    genreate_feature_imdbids(imdbid_locationcountry_dict, "locationcountry_imdbids.json")
+    # genreate_feature_imdbids(imdbid_locationcity_dict, "locationcity_imdbids.json")
+    # genreate_feature_imdbids(imdbid_locationcountry_dict, "locationcountry_imdbids.json")
+    # genreate_feature_imdbids(imdbid_mainactors_dict, "mainactor_imdbids.json")
 
 
 
@@ -111,6 +113,7 @@ def generate_movie_information(infile):
             output_dict["imdbActors"] = movie["imdbActors"]
             output_dict["imdbId"] = movie["imdbId"]
             output_dict["releaseYear"] = movie["releaseYear"]
+            output_dict["imdbMainactors"] = movie["imdbMainactors"]
 
             wikikeyword_list = []
             for item in movie["wikikeywords"]:
@@ -243,8 +246,8 @@ def createweight():
 
 
 
-# generate_movie_information("boxer_movies.json")
-transform("boxer_movies_information.dat")
+generate_movie_information("boxer_movies.json")
+# transform("boxer_movies_information.dat")
 
 # createweight()
 

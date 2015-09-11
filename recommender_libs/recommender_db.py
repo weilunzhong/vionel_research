@@ -38,6 +38,8 @@ class RecommenderDB:
             feature_key = "locationCity"
         elif feature_name == "locationcountry":
             feature_key = "locationCountry"
+        elif feature_name == "mainactor":
+            feature_key = "imdbMainactors"
             
         all_movies_list = list(self.collection.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
         # print all_movies_list

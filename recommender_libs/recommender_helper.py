@@ -93,7 +93,7 @@ class RecommenderHelper:
         return cosine_score
 
 
-    def __comparison_score(self, movieid_list, movieid_with_featureid_dict):
+    def __comparison_score(self, movieid_list, movieid_with_featureid_dict, coefficient):
         input_movie_features = []
         for item in movieid_list:
             try:
@@ -106,7 +106,7 @@ class RecommenderHelper:
         result_dict = {}
         for k, v in movieid_with_featureid_dict.items():
             intersection_num = len(list(set(v).intersection(set(input_movie_features))))
-            result_dict[k] = intersection_num * 0.1
+            result_dict[k] = intersection_num * coefficient
 
         return result_dict
 
@@ -151,8 +151,11 @@ class RecommenderHelper:
 
             return result_dict
 
+        elif recommended_by == "mainactor":
+            result_dict = self.__comparison_score(movieid_list, movieid_with_featureid_dict, 0.5)
+            return result_dict
         else:
-            result_dict = self.__comparison_score(movieid_list, movieid_with_featureid_dict)
+            result_dict = self.__comparison_score(movieid_list, movieid_with_featureid_dict, 0.1)
             return result_dict
 
 
