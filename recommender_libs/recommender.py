@@ -154,6 +154,17 @@ def recommend(input_movieid_list, num_of_recommended_movies):
 
     return result_dict
 
+def calculateSimilarity(movieid_1, movieid_2):
+    recommender_helper = RecommenderHelper()
+    imdbactor_movieid_sim_dict = recommender_helper.recommend(movieid_1, "actor")
+    imdbdirector_movieid_sim_dict = recommender_helper.recommend(movieid_1, "director")
+    imdbgenre_movieid_sim_dict = recommender_helper.recommend(movieid_1, "genre")
+    imdbkeyword_movieid_sim_dict = recommender_helper.recommend(movieid_1, "imdbkeyword")
+    wikikeyword_movieid_sim_dict = recommender_helper.recommend(movieid_1, "wikikeyword")
+    vioneltheme_movieid_sim_dict = recommender_helper.recommend(movieid_1, "vioneltheme")
+    vionelscene_movieid_sim_dict = recommender_helper.recommend(movieid_1, "vionelscene")
+    locationcountry_movieid_sim_dict = recommender_helper.recommend(movieid_1, "locationcountry")
+    locationcity_movieid_sim_dict = recommender_helper.recommend(movieid_1, "locationcity")
 
 usr_id_list = ['tt1615065']
 
