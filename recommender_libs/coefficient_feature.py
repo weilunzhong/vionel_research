@@ -50,73 +50,95 @@ class CoefficientFeature:
         else:
             return float(num1) / num2
 
+    def __getAddedSim(self, indict1, indict2, category_parameter):
+
+        indict1_keys = indict1.keys()
+        indict2_keys = indict2.keys()
+        all_keys = list(set(indict1_keys + indict2_keys))
+        key_match_counter = 0
+        for key in all_keys:
+            if key in indict1_keys and key in indict2:
+                key_match_counter += 1
+
+        return category_parameter * key_match_counter
+
+
+    def getCategoryNumDict(self, director_imdbids_dict, imdbid_category_dict):
+        director_category_dict = {}
+        for directorid in director_imdbids_dict:
+            movie_list = director_imdbids_dict[directorid]
+            category_num_dict = {}
+
+            for movieid in movie_list:
+                category_list = imdbid_category_dict[movieid]
+
+                for category in category_list:
+                    if category not in category_num_dict.keys():
+                        category_num_dict[category] = 1
+                    else:
+                        category_num_dict[category] += 1
+            director_category_dict[directorid] = category_num_dict
+        return director_category_dict
 
 
     def getDirectorSimilarity(self, director_imdbids_path):
+        output_path = 'director_coefficient.json'
+        director_coefficient_file = open(output_path, 'w')
         with open(director_imdbids_path) as director_imdbids_file:
             director_imdbids_dict = json.loads(director_imdbids_file.readline())
 
-        director_genres_dict = {}
-        director_vionelscene_dict = {}
-        director_locationcity_dict = {}
-        director_locationcountry_dict = {}
-        for directorid in director_imdbids_dict:
-            movie_list = director_imdbids_dict[directorid]
-            genre_num_dict = {}
-            vionelscene_num_dict = {}
-            locationcity_num_dict = {}
-            locationcountry_num_dict = {}
+        # category with cosin similarity
+        director_genres_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_genre_dict)
 
-            for movieid in movie_list:
-                genre_list = self.imdbid_genre_dict[movieid]
-                vionelscene_list = self.imdbid_vionelscene_dict[movieid]
-                locationcity_list = self.imdbid_locationcity_dict[movieid]
-                locationcountry_list = self.imdbid_locationcountry_dict[movieid]
+        director_vionelscene_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_vionelscene_dict)
+        director_locationcity_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_locationcity_dict)
+        director_locationcountry_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_locationcountry_dict)
 
-                for genre in genre_list:
-                    if genre not in genre_num_dict.keys():
-                        genre_num_dict[genre] = 1
-                    else:
-                        genre_num_dict[genre] += 1
+        # category with added similarity
+        director_actor_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_actor_dict)
+        director_imdbkeyword_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_imdbkeyword_dict)
+        director_wikikeyword_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_wikikeyword_dict)
+        director_vioneltheme_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_vioneltheme_dict)
+        #print director_vioneltheme_dict
 
-                for vionelscene in vionelscene_list:
-                    if vionelscene not in vionelscene_num_dict.keys():
-                        vionelscene_num_dict[vionelscene] = 1
-                    else:
-                        vionelscene_num_dict[vionelscene] += 1
 
-                for locationcity in locationcity_list:
-                    if locationcity not in locationcity_num_dict.keys():
-                        locationcity_num_dict[locationcity] = 1
-                    else:
-                        locationcity_num_dict[locationcity] += 1
 
-                for locationcountry in locationcountry_list:
-                    if locationcountry not in locationcountry_num_dict.keys():
-                        locationcountry_num_dict[locationcountry] = 1
-                    else:
-                        locationcountry_num_dict[locationcountry] += 1
 
-            director_genres_dict[directorid] = genre_num_dict
-            director_vionelscene_dict[directorid] = vionelscene_num_dict
-            director_locationcity_dict[directorid] = locationcity_num_dict
-            director_locationcountry_dict[directorid] = locationcountry_num_dict
 
         director_director_score_dict = {}
-        for k1 in director_imdbids_dict:
+        for index, k1 in enumerate(director_imdbids_dict):
+            director_score_dict = {}
             for k2 in director_imdbids_dict:
-                director_score_dict = {}
+                
+
+                # score for consin similarity
                 genre_score = self.__getCosSim(director_genres_dict[k1], director_genres_dict[k2])
                 vionelscene_score = self.__getCosSim(director_vionelscene_dict[k1], director_vionelscene_dict[k2])
                 locationcity_score = self.__getCosSim(director_locationcity_dict[k1], director_locationcity_dict[k2])
                 locationcountry_score = self.__getCosSim(director_locationcountry_dict[k1], director_locationcountry_dict[k2])
 
-                score = genre_score + vionelscene_score + locationcity_score + locationcountry_score
+                # score for added similarity
+                actor_score = self.__getAddedSim(director_actor_dict[k1], director_actor_dict[k2], 0.1)
+                imdbkeyword_score = self.__getAddedSim(director_imdbkeyword_dict[k1], director_imdbkeyword_dict[k2], 0.1)
+                wikikeyword_score = self.__getAddedSim(director_wikikeyword_dict[k1], director_wikikeyword_dict[k2], 0.1)
+                vioneltheme_score = self.__getAddedSim(director_vioneltheme_dict[k1], director_vioneltheme_dict[k2], 0.1)
+
+
+
+
+                score = genre_score + vionelscene_score + locationcity_score + locationcountry_score + actor_score +imdbkeyword_score + wikikeyword_score + vioneltheme_score
 
                 director_score_dict[k2] = score
+                # print actor_score
 
             director_director_score_dict[k1] = director_score_dict
+            print index, 'director processed'
 
+            json.dump({k1: director_score_dict}, director_coefficient_file)
+            director_coefficient_file.write('\n')
+        
+        
+        director_coefficient_file.close
 
         print Counter(director_director_score_dict).most_common(20)
 
