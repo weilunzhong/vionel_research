@@ -11,6 +11,7 @@ class CoefficientFeature:
 
     recommender_db = RecommenderDB()
 
+    # get the dictionary of all the categories from db
     def __init__(self):
         self.imdbid_genre_dict = self.recommender_db.get_imdbid_feature_dict("genre")
         self.imdbid_actor_dict = self.recommender_db.get_imdbid_feature_dict("actor")
@@ -24,7 +25,7 @@ class CoefficientFeature:
 
 
 
-
+    # calculate consin similarity
     def __getCosSim(self, indict1, indict2):
         
         indict1_keys = indict1.keys()
@@ -50,6 +51,7 @@ class CoefficientFeature:
         else:
             return float(num1) / num2
 
+    # calculate added similarity
     def __getAddedSim(self, indict1, indict2, category_parameter):
 
         indict1_keys = indict1.keys()
@@ -62,7 +64,7 @@ class CoefficientFeature:
 
         return category_parameter * key_match_counter
 
-
+    # load the dict and count aparences
     def getCategoryNumDict(self, director_imdbids_dict, imdbid_category_dict):
         director_category_dict = {}
         for directorid in director_imdbids_dict:
@@ -81,6 +83,7 @@ class CoefficientFeature:
         return director_category_dict
 
 
+    # calculate and write the similarity
     def getDirectorSimilarity(self, director_imdbids_path):
         output_path = 'director_coefficient.json'
         director_coefficient_file = open(output_path, 'w')
