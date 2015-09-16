@@ -77,13 +77,8 @@ def reason_of_recommendation(all_feature_counter_list):
         score_dict["locationcountry"] = all_feature_counter_list[9][imdbid]
         sorted_score_dict = sorted(score_dict.iteritems(), key=lambda d:d[1], reverse=True)
         reason_list = []
-<<<<<<< HEAD
-        #print sorted_score_dict
-        for item in sorted_score_dict[:2]:
-=======
         print sorted_score_dict
         for item in sorted_score_dict[:4]:
->>>>>>> 026642342520fe1b3eca585eacb0e82c17fc291a
             if item[1] != 0:
                 reason_list.append(item[0])
         reason_tuple_list.append((key[0], reason_list,))
@@ -176,8 +171,15 @@ def calculateSimilarity(movieid_1, movieid_2):
 
 usr_id_list = ['tt1615065']
 
-recommendation_result = recommend(usr_id_list, 10)
-print recommendation_result['reason'], 'here is the result'
+# recommendation_result = recommend(usr_id_list, 10)
+# print recommendation_result['reason'], 'here is the result'
+
+recommender_db = RecommenderDB()
+
+result = recommender_db.getDirectorCoefficientDict()
+
+print result['nm0750857']['nm0347492']
+print result['nm0001565']['nm0347492']
 
 
 ###########################################################################

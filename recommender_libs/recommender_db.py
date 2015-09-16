@@ -9,7 +9,19 @@ class RecommenderDB:
     def __init__(self):
         client = MongoClient()
         self.db = client.VionelMovies
-        self.collection = self.db.boxerMovies
+        self.collection_allmovie = self.db.boxerMovies
+        self.collection_director_coefficient = self.db.boxerDirectorCoefficient
+
+
+    def getDirectorCoefficientDict(self):
+        result_dict = {}
+        for director in self.collection_director_coefficient.find():
+            for element in director:
+                if element != '_id':
+                    result_dict[element] = director[element]
+
+        return result_dict
+
 
     def get_imdbid_feature_dict(self, feature_name):
         result_dict = {}
@@ -41,7 +53,7 @@ class RecommenderDB:
         elif feature_name == "mainactor":
             feature_key = "imdbMainactors"
             
-        all_movies_list = list(self.collection.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
+        all_movies_list = list(self.collection_allmovie.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
         # print all_movies_list
         for movie in all_movies_list:
             imdbid = movie["imdbId"]
