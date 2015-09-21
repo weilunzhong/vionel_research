@@ -169,17 +169,17 @@ def calculateSimilarity(movieid_1, movieid_2):
     locationcountry_movieid_sim_dict = recommender_helper.recommend(movieid_1, "locationcountry")
     locationcity_movieid_sim_dict = recommender_helper.recommend(movieid_1, "locationcity")
 
-usr_id_list = ['tt1615065']
+# usr_id_list = ['tt1615065']
 
 # recommendation_result = recommend(usr_id_list, 10)
 # print recommendation_result['reason'], 'here is the result'
 
-recommender_db = RecommenderDB()
+# recommender_db = RecommenderDB()
 
-result = recommender_db.getDirectorCoefficientDict()
+# result = recommender_db.getDirectorCoefficientDict()
 
-print result['nm0750857']['nm0347492']
-print result['nm0001565']['nm0347492']
+# print result['nm0750857']['nm0347492']
+# print result['nm0001565']['nm0347492']
 
 
 ###########################################################################

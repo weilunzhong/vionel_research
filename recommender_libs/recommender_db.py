@@ -53,6 +53,7 @@ class RecommenderDB:
         elif feature_name == "mainactor":
             feature_key = "imdbMainactors"
             
+
         all_movies_list = list(self.collection_allmovie.find({}, {"imdbId": 1, feature_key: 1, "_id": 0}))
         # print all_movies_list
         for movie in all_movies_list:

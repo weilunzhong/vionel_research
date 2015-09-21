@@ -14,6 +14,7 @@ class CoefficientFeature:
     def __init__(self):
         self.imdbid_genre_dict = self.recommender_db.get_imdbid_feature_dict("genre")
         self.imdbid_actor_dict = self.recommender_db.get_imdbid_feature_dict("actor")
+        self.imdbid_director_dict = self.recommender_db.get_imdbid_feature_dict("director")
         self.imdbid_imdbkeyword_dict = self.recommender_db.get_imdbid_feature_dict("imdbkeyword")
         self.imdbid_wikikeyword_dict = self.recommender_db.get_imdbid_feature_dict("wikikeyword")
         self.imdbid_vioneltheme_dict = self.recommender_db.get_imdbid_feature_dict("vioneltheme")
@@ -62,6 +63,18 @@ class CoefficientFeature:
 
         return category_parameter * key_match_counter
 
+    def __getJaccardSim(self, indict1, indict2):
+
+        indict1_keys = indict1.keys()
+        indict2_keys = indict2.keys()
+        all_keys = list(set(indict1_keys + indict2_keys))
+        key_match_counter = 0
+        for key in all_keys:
+            if key in indict1_keys and key in indict2:
+                key_match_counter += 1
+
+        return float(key_match_counter) / len(all_keys)
+
 
     def getCategoryNumDict(self, director_imdbids_dict, imdbid_category_dict):
         director_category_dict = {}
@@ -81,8 +94,69 @@ class CoefficientFeature:
         return director_category_dict
 
 
+    def getUsrSimilarity(self, usr_imdbids_path):
+        output_path = '../../actor_coefficient.json'
+        usr_coefficient_file = open(output_path, 'w')
+        with open(usr_imdbids_path) as usr_imdbids_file:
+            usr_imdbids_dict = json.loads(usr_imdbids_file.readline())
+
+        # category with cosin similarity
+        usr_genres_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_genre_dict)
+        usr_director_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_director_dict)
+        usr_vionelscene_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_vionelscene_dict)
+        usr_locationcity_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_locationcity_dict)
+        usr_locationcountry_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_locationcountry_dict)
+
+        # category with added similarity
+        usr_actor_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_actor_dict)
+        # usr_imdbkeyword_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_imdbkeyword_dict)
+        # usr_wikikeyword_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_wikikeyword_dict)
+        usr_vioneltheme_dict = self.getCategoryNumDict(usr_imdbids_dict, self.imdbid_vioneltheme_dict)
+
+
+        usr_usr_score_dict = {}
+        for index, k1 in enumerate(usr_imdbids_dict):
+            usr_score_dict = {}
+            for k2 in usr_imdbids_dict:
+                
+
+                # score for consin similarity
+                genre_score = self.__getCosSim(usr_genres_dict[k1], usr_genres_dict[k2])
+                director_score = self .__getCosSim(usr_director_dict[k1], usr_director_dict[k2])
+                vionelscene_score = self.__getCosSim(usr_vionelscene_dict[k1], usr_vionelscene_dict[k2])
+                locationcity_score = self.__getCosSim(usr_locationcity_dict[k1], usr_locationcity_dict[k2])
+                locationcountry_score = self.__getCosSim(usr_locationcountry_dict[k1], usr_locationcountry_dict[k2])
+
+                # score for added similarity
+                actor_score = self.__getJaccardSim(usr_actor_dict[k1], usr_actor_dict[k2])
+                # imdbkeyword_score = self.__getAddedSim(usr_imdbkeyword_dict[k1], usr_imdbkeyword_dict[k2], 0.1)
+                # wikikeyword_score = self.__getAddedSim(usr_wikikeyword_dict[k1], usr_wikikeyword_dict[k2], 0.1)
+                vioneltheme_score = self.__getAddedSim(usr_vioneltheme_dict[k1], usr_vioneltheme_dict[k2], 0.1)
+
+
+
+
+                score = genre_score + vionelscene_score + locationcity_score + locationcountry_score + actor_score + vioneltheme_score
+
+                usr_score_dict[k2] = score
+
+
+            usr_usr_score_dict[k1] = usr_score_dict
+            print index, 'usr processed'
+
+            json.dump({k1: usr_score_dict}, usr_coefficient_file)       
+            usr_coefficient_file.write('\n')
+        
+        
+        usr_coefficient_file.close
+
+        print Counter(usr_usr_score_dict).most_common(20)
+
+        
+
+
     def getDirectorSimilarity(self, director_imdbids_path):
-        output_path = 'director_coefficient.json'
+        output_path = '../../director_coefficient_norm.json'
         director_coefficient_file = open(output_path, 'w')
         with open(director_imdbids_path) as director_imdbids_file:
             director_imdbids_dict = json.loads(director_imdbids_file.readline())
@@ -99,8 +173,6 @@ class CoefficientFeature:
         director_imdbkeyword_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_imdbkeyword_dict)
         director_wikikeyword_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_wikikeyword_dict)
         director_vioneltheme_dict = self.getCategoryNumDict(director_imdbids_dict, self.imdbid_vioneltheme_dict)
-        #print director_vioneltheme_dict
-
 
 
 
@@ -118,7 +190,7 @@ class CoefficientFeature:
                 locationcountry_score = self.__getCosSim(director_locationcountry_dict[k1], director_locationcountry_dict[k2])
 
                 # score for added similarity
-                actor_score = self.__getAddedSim(director_actor_dict[k1], director_actor_dict[k2], 0.1)
+                actor_score = self.__getJaccardSim(director_actor_dict[k1], director_actor_dict[k2])
                 imdbkeyword_score = self.__getAddedSim(director_imdbkeyword_dict[k1], director_imdbkeyword_dict[k2], 0.1)
                 wikikeyword_score = self.__getAddedSim(director_wikikeyword_dict[k1], director_wikikeyword_dict[k2], 0.1)
                 vioneltheme_score = self.__getAddedSim(director_vioneltheme_dict[k1], director_vioneltheme_dict[k2], 0.1)
@@ -129,7 +201,6 @@ class CoefficientFeature:
                 score = genre_score + vionelscene_score + locationcity_score + locationcountry_score + actor_score +imdbkeyword_score + wikikeyword_score + vioneltheme_score
 
                 director_score_dict[k2] = score
-                # print actor_score
 
             director_director_score_dict[k1] = director_score_dict
             print index, 'director processed'
@@ -145,7 +216,6 @@ class CoefficientFeature:
         
 
 
-
-
 cf = CoefficientFeature()
-cf.getDirectorSimilarity("director_imdbids.json")
+cf.getUsrSimilarity("famous_actor_imdbids.json")
+# cf.getDirectorSimilarity("director_imdbids.json")
